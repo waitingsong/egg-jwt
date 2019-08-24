@@ -124,12 +124,12 @@
   <span class="hljs-keyword">public</span> signup(ctx: Context) {
     <span class="hljs-keyword">const</span> token = <span class="hljs-keyword">this</span>.jwt.sign({ foo: <span class="hljs-string">'bar'</span>, iat: <span class="hljs-number">1566629919</span> })
     <span class="hljs-keyword">const</span> valid = <span class="hljs-keyword">this</span>.jwt.verify(token)
-    ctx.body = <span class="hljs-string">`token: <span class="hljs-subst">${token}</span>`</span>
+    ctx.body = <span class="hljs-string">`\ntoken: <span class="hljs-subst">${token}</span>`</span>
   }
 
   <span class="hljs-meta">@get</span>(<span class="hljs-string">'/'</span>)
   <span class="hljs-keyword">public</span> index(ctx: Context): <span class="hljs-built_in">void</span> {
-    ctx.body = <span class="hljs-string">`payload: <span class="hljs-subst">${ctx.state &amp;&amp; ctx.state.user ? JSON.stringify(ctx.state.user) : 'not found'}</span>`</span>
+    ctx.body = <span class="hljs-string">`\npayload: <span class="hljs-subst">${ctx.state &amp;&amp; ctx.state.user ? JSON.stringify(ctx.state.user) : 'not found'}</span>`</span>
   }
 
 }</code></pre>

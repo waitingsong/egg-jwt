@@ -72,12 +72,12 @@ export class UserService {
   public signup(ctx: Context) {
     const token = this.jwt.sign({ foo: 'bar', iat: 1566629919 })
     const valid = this.jwt.verify(token)
-    ctx.body = `token: ${token}`
+    ctx.body = `\ntoken: ${token}`
   }
 
   @get('/')
   public index(ctx: Context): void {
-    ctx.body = `payload: ${ctx.state && ctx.state.user ? JSON.stringify(ctx.state.user) : 'not found'}`
+    ctx.body = `\npayload: ${ctx.state && ctx.state.user ? JSON.stringify(ctx.state.user) : 'not found'}`
   }
 
 }
