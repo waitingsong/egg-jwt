@@ -1,10 +1,21 @@
 {
-  "name": "npm-base",
+  "name": "@waiting/egg-jwt",
   "author": "waiting",
   "version": "0.0.1",
-  "description": "npm boilerplate",
+  "description": "jwt plugin of egg for signing, verifying as plugin and authentication as middleware",
+  "eggPlugin": {
+    "name": "jwt"
+  },
   "keywords": [
-    "种子项目",
+    "midway",
+    "egg",
+    "eggPlugin",
+    "egg-plugin",
+    "jwt",
+    "authorization",
+    "authentication",
+    "header",
+    "cookies",
     "typescript",
     "ts"
   ],
@@ -14,16 +25,16 @@
   "bin": {},
   "browser": "",
   "es2015": "",
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./index.cjs.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
   "bugs": {
-    "url": "https://github.com/waitingsong/npm-base/issues"
+    "url": "https://github.com/waitingsong/egg-jwt/issues"
   },
-  "homepage": "https://github.com/waitingsong/npm-base#readme",
+  "homepage": "https://waitingsong.github.io/egg-jwt",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waitingsong/npm-base.git"
+    "url": "git+https://github.com/waitingsong/egg-jwt.git"
   },
   "license": "MIT",
   "nyc": {
@@ -48,9 +59,11 @@
     "all": true
   },
   "dependencies": {
-    "rxjs": "^6.5.2"
+    "jsonwebtoken": "^8.5.1",
+    "koa-jwt": "^3.5.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.3.3",
     "@types/mocha": "*",
     "@types/node": "*",
     "@types/power-assert": "*",
@@ -60,6 +73,7 @@
     "@waiting/eslint-config": "^2.1.0",
     "coveralls": "^3.0.5",
     "cross-env": "^5.2.0",
+    "egg": "^2.23.0",
     "eslint": "^6.2.0",
     "espower-typescript": "^9.0.2",
     "intelli-espower-loader": "^1.0.1",
