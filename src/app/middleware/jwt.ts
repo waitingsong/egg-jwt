@@ -75,7 +75,7 @@ function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToken {
     if (options && options.passthrough === true) {
       return ''
     }
-    ctx.throw(401, 'Invalid Authorization header format. Format is "Authorization: Bearer <token>"')
+    ctx.throw(401, 'Invalid Authorization header format. Format is "Authorization: Bearer <token>". token not found in Cookies or Header')
   }
   return ''
 }
