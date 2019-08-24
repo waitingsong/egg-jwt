@@ -13,7 +13,6 @@
     "outDir": "./",
     "pretty": true,
     "skipLibCheck": true,
-    "sourceMap": true,
     "strict": true,
     "target": "ES2017",
     "tsBuildInfoFile": ".vscode/.tsbuildinfo",
