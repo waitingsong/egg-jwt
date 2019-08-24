@@ -134,8 +134,8 @@
 
 }</code></pre>
 				<p>Then:</p>
-				<pre><code class="language-sh">curl 127.0.0.1:7001
-// response 401
+				<pre><code class="language-sh">curl -I 127.0.0.1:7001
+// response HTTP/1.1 401 Unauthorized
 
 curl 127.0.0.1:7001/signup
 // response ends with signature <span class="hljs-string">'PZkACzct30IcrymoodYlW0LW0Fc1r6Hs1l8yOZSeNpk'</span>
