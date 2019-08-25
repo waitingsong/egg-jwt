@@ -1,16 +1,45 @@
 import * as assert from 'assert'
 
 import {
+  JwtConfig,
   JwtOptions,
   JwtPayload,
   JwtToken,
 } from './model'
 import {
   initialAuthOpts,
+  initialConfig,
   initialJwtOptions,
   JwtMsg,
 } from './config'
 
+
+/** Generate jwtConfig with input and default value */
+export function parseConfig(input: JwtConfig): JwtConfig {
+  const config = {
+    agent: initialConfig.agent,
+    client: parseOptions(input.client),
+    enable: initialConfig.enable,
+  } as JwtConfig
+
+  if (typeof input.agent === 'boolean') {
+    config.agent = input.agent
+  }
+
+  if (typeof input.enable === 'boolean') {
+    config.enable = input.enable
+  }
+
+  if (typeof input.ignore !== 'undefined') {
+    config.ignore = input.ignore
+  }
+
+  if (typeof input.match !== 'undefined') {
+    config.match = input.match
+  }
+
+  return config
+}
 
 /** Generate jwtOptions with input and default value */
 export function parseOptions(client?: JwtOptions): JwtOptions {

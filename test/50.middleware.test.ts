@@ -4,6 +4,7 @@ import { Context } from 'egg'
 
 import { JwtConfig, jwtMiddlewareFactorey } from '../src'
 import { initialConfig, JwtMsg } from '../src/lib/config'
+import { parseConfig } from '../src/lib/util'
 
 import {
   secret,
@@ -17,7 +18,7 @@ describe(filename, () => {
 
   describe('Should middleware works', () => {
     it('w/o token', async () => {
-      const config: JwtConfig = { ...initialConfig }
+      const config: JwtConfig = parseConfig(initialConfig)
       const mw = jwtMiddlewareFactorey(config)
       const ctx = createCtx()
       const next = createNextCb()
@@ -33,7 +34,7 @@ describe(filename, () => {
     })
 
     it('w/o token debug', async () => {
-      const configDebug: JwtConfig = { ...initialConfig }
+      const configDebug: JwtConfig = parseConfig(initialConfig)
       configDebug.client.debug = true
       const mw = jwtMiddlewareFactorey(configDebug)
       const ctx = createCtx()
@@ -45,6 +46,23 @@ describe(filename, () => {
       catch (ex) {
         const msg: string = ex.message
         return assert(msg.includes('401') && msg.includes(JwtMsg.TokenNotFound))
+      }
+      assert(false, 'Should throw error but NOT')
+    })
+
+    it('w/o token again', async () => {
+      const config: JwtConfig = parseConfig(initialConfig)
+      assert(config.client.debug !== true)
+      const mw = jwtMiddlewareFactorey(config)
+      const ctx = createCtx()
+      const next = createNextCb()
+
+      try {
+        await mw(ctx, next)
+      }
+      catch (ex) {
+        const msg: string = ex.message
+        return assert(msg.includes('401') && msg.includes(JwtMsg.AuthFailed))
       }
       assert(false, 'Should throw error but NOT')
     })
