@@ -9,3 +9,4 @@ export const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
 
 export const payload2 = { foo: 'bar' }
 export const tokenHeader2 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+

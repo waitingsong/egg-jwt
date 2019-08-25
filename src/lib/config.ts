@@ -4,24 +4,20 @@ import { AuthenticateOpts, JwtConfig, JwtOptions } from './model'
 export const pluginName = 'jwt'
 export const middlewareName = 'jwt'
 
-export const initialAuthOpts: AuthenticateOpts = {
+export const initialAuthOpts: Readonly<AuthenticateOpts> = {
   cookie: false,
   key: 'user',
   passthrough: false,
 }
-export const initialJwtOptions: Required<JwtOptions> = {
-  authOpts: { ...initialAuthOpts },
+export const initialJwtOptions: Readonly<JwtOptions> = {
+  // authOpts: { ...initialAuthOpts },
   debug: false,
   secret: '',
-  decodeOpts: {},
-  signOpts: {},
-  verifySecret: '',
-  verifyOpts: {},
 }
 
-export const initialConfig: JwtConfig = {
+export const initialConfig: Readonly<JwtConfig> = {
   agent: false,
-  client: { ...initialJwtOptions },
+  client: { debug: false, secret: '' },
   enable: false,
 }
 

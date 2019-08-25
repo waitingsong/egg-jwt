@@ -1,7 +1,50 @@
 import * as assert from 'assert'
 
-import { JwtToken, JwtPayload, JwtOptions } from './model'
-import { JwtMsg } from './config'
+import {
+  JwtOptions,
+  JwtPayload,
+  JwtToken,
+} from './model'
+import {
+  initialAuthOpts,
+  initialJwtOptions,
+  JwtMsg,
+} from './config'
+
+
+/** Generate jwtOptions with input and default value */
+export function parseOptions(client?: JwtOptions): JwtOptions {
+  const opts = {} as JwtOptions
+
+  if (client) {
+    const {
+      debug,
+      secret,
+      authOpts,
+      decodeOpts,
+      signOpts,
+      verifyOpts,
+      verifySecret,
+    } = client
+
+    opts.debug = !! debug
+    opts.secret = typeof secret === 'undefined' ? '' : secret
+    opts.authOpts = authOpts
+      ? { ...initialAuthOpts, ...authOpts }
+      : { ...initialAuthOpts }
+    opts.decodeOpts = decodeOpts ? { ...decodeOpts } : void 0
+    opts.signOpts = signOpts ? { ...signOpts } : void 0
+    opts.verifyOpts = verifyOpts ? { ...verifyOpts } : void 0
+    opts.verifySecret = typeof verifySecret === 'undefined' ? void 0 : verifySecret
+  }
+  else {
+    opts.debug = initialJwtOptions.debug
+    opts.secret = initialJwtOptions.secret
+    opts.authOpts = { ...initialAuthOpts }
+  }
+
+  return opts
+}
 
 
 export function validateTokenString(input: JwtToken): void {

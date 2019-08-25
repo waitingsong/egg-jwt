@@ -11,18 +11,19 @@ import {
   SignSecret,
   VerifySecret,
 } from '../../lib/model'
-import { resolveFromAuthorizationHeader, resolveFromCookies } from '../../lib/resolvers'
-import { initialJwtOptions, JwtMsg } from '../../lib/config'
+import {
+  resolveFromAuthorizationHeader,
+  resolveFromCookies,
+} from '../../lib/resolvers'
+import { JwtMsg } from '../../lib/config'
 import { Jwt } from '../../lib/jwt'
+import { parseOptions } from '../../lib/util'
 
 
 /** jwt Middleware Factory */
 export default (config: JwtConfig): EggMiddleware => {
+  const opts = parseOptions(config.client) // defined out of jwtmw!
   const jwtmw = (ctx: Context, next: () => Promise<void>) => {
-    const opts: Required<JwtOptions> = {
-      ...initialJwtOptions,
-      ...config.client,
-    }
     return authenticate(ctx, next, opts)
   }
   return jwtmw
@@ -31,11 +32,11 @@ export default (config: JwtConfig): EggMiddleware => {
 async function authenticate(
   ctx: Context,
   next: () => Promise<void>,
-  options: Required<JwtOptions>,
+  options: JwtOptions,
 ): Promise<void> {
 
   const { debug } = options
-  const { key, passthrough } = options.authOpts
+  const { key, passthrough } = options.authOpts as AuthenticateOpts
 
   try {
     const token = retrieveToken(ctx, options.authOpts)

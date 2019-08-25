@@ -3,9 +3,10 @@ import * as assert from 'assert'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Agent, Application } from 'egg'
 
-import { initialConfig, pluginName, middlewareName } from './config'
+import { pluginName, middlewareName } from './config'
 import { Jwt } from './jwt'
 import { JwtOptions } from './model'
+import { parseOptions } from './util'
 
 
 export function bindJwtOnAppOrAgent(app: Application | Agent): void {
@@ -13,10 +14,7 @@ export function bindJwtOnAppOrAgent(app: Application | Agent): void {
 }
 
 function createOneClient(options: JwtOptions, app: Application | Agent): Jwt {
-  const opts: JwtOptions = options
-    ? { ...initialConfig.client, ...options }
-    : { ...initialConfig.client }
-
+  const opts: JwtOptions = parseOptions(options)
   assert(opts && Object.keys(opts).length, `[egg-${pluginName}] config empty`)
 
   const client = new Jwt(opts)
