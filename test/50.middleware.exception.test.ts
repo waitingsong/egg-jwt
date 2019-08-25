@@ -1,28 +1,25 @@
 import { basename } from '@waiting/shared-core'
 import * as assert from 'power-assert'
-import { Context } from 'egg'
 
-import { JwtConfig, jwtMiddlewareFactorey, Jwt } from '../src'
+import { JwtConfig, jwtMiddlewareFactorey } from '../src'
 import { initialConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'
 import { parseConfig } from '../src/lib/util'
 
-import {
-  secret,
-  payload1, token1,
-} from './test.config'
+import { token1 } from './test.config'
+import { createContext, createNextCb } from './test.util'
 
 
 const filename = basename(__filename)
 
 describe(filename, () => {
 
-  describe('Should middleware works', () => {
+  describe('Should middleware works with exception', () => {
     it('w/o token', async () => {
       const config: JwtConfig = parseConfig(initialConfig)
       const mw = jwtMiddlewareFactorey(config)
 
       const ctx = createContext()
-      const next = createNextCb()
+      const next = createNextCb(ctx)
 
       try {
         await mw(ctx, next)
@@ -38,7 +35,7 @@ describe(filename, () => {
       config.client.debug = true
       const mw = jwtMiddlewareFactorey(config)
       const ctx = createContext()
-      const next = createNextCb()
+      const next = createNextCb(ctx)
 
       try {
         await mw(ctx, next)
@@ -54,7 +51,7 @@ describe(filename, () => {
       const mw = jwtMiddlewareFactorey(config)
 
       const ctx = createContext()
-      const next = createNextCb()
+      const next = createNextCb(ctx)
 
       assert(config.client.debug !== true)
 
@@ -78,7 +75,7 @@ describe(filename, () => {
         },
       }
       const ctx = createContext(props)
-      const next = createNextCb()
+      const next = createNextCb(ctx)
 
       assert(config.client.debug !== true)
 
@@ -102,7 +99,7 @@ describe(filename, () => {
         },
       }
       const ctx = createContext(props)
-      const next = createNextCb()
+      const next = createNextCb(ctx)
 
       try {
         await mw(ctx, next)
@@ -113,31 +110,6 @@ describe(filename, () => {
       }
       assert(false, 'Should throw error but NOT')
     })
-
-
   })
 })
 
-
-function createContext(props?: object): Context {
-  const ctx = {
-    throw: (status: number, message: string) => {
-      throw new Error(`${status}:${message}`)
-    },
-    state: {},
-    app: {
-      jwt: new Jwt(initialJwtOptions),
-    },
-    ...props,
-  } as Context
-
-  return ctx
-}
-
-function createNextCb(): () => Promise<void> {
-  return () => {
-    return new Promise((done) => {
-      done()
-    })
-  }
-}
