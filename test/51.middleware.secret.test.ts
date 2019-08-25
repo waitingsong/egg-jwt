@@ -34,6 +34,25 @@ describe(filename, () => {
 
       await mw(ctx, next)
     })
+
+    it('string by ctx.state.secret', async () => {
+      const config: JwtConfig = parseConfig(initialConfig)
+      config.client.secret = secret
+      const mw = jwtMiddlewareFactorey(config)
+
+      const props = {
+        header: {
+          authorization: `${schemePrefix} ${token1}`,
+        },
+        state: {
+          secret,
+        },
+      }
+      const ctx = createContext(props)
+      const next = createNextCb(ctx)
+
+      await mw(ctx, next)
+    })
   })
 })
 
