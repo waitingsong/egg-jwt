@@ -20,7 +20,7 @@ export default (config: JwtConfig) => {
   return jwtmw
 }
 
-function authenticate(
+async function authenticate(
   ctx: Context,
   next: () => Promise<void>,
   options: Required<JwtOptions>,
@@ -29,23 +29,24 @@ function authenticate(
   const { debug } = options
   const { key, passthrough } = options.authOpts
 
-  const token = retrieveToken(ctx, options.authOpts)
-  if (! token && ! passthrough) {
-    ctx.throw(401, debug ? 'Token not found' : 'Authentication Failed')
-  }
-
-  const secretSet: Set<VerifySecret> = genVerifySecretSet(
-    options.secret,
-    options.verifySecret,
-    ctx.state.secret,
-  )
-
   try {
+    const token = retrieveToken(ctx, options.authOpts)
+
+    if (! token) {
+      ctx.throw(401, debug ? 'Token not found' : 'Authentication Failed')
+    }
+
+    const secretSet: Set<VerifySecret> = genVerifySecretSet(
+      options.secret,
+      options.verifySecret,
+      ctx.state.secret,
+    )
+
     const decoded = validateToken(ctx.app.jwt, token, secretSet, options)
     ctx.state[key] = decoded
   }
   catch (ex) {
-    if (options.authOpts && options.authOpts.passthrough === true) {
+    if (await parseByPassthrough(ctx, passthrough) === true) {
       // lets downstream middlewares handle JWT exceptions
       ctx.state.jwtOriginalError = ex
     }
@@ -57,6 +58,7 @@ function authenticate(
 
   return next()
 }
+
 
 function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToken {
   let token = resolveFromCookies(ctx.cookies, options ? options.cookie : false)
@@ -159,3 +161,20 @@ function validateToken(
   return ret
 }
 
+
+/** Compute passthrough state */
+async function parseByPassthrough(
+  ctx: Context,
+  passthrough: AuthenticateOpts['passthrough'],
+): Promise<boolean> {
+
+  if (passthrough === true) {
+    return true
+  }
+  else if (typeof passthrough === 'function') {
+    return passthrough(ctx)
+  }
+  else {
+    return false
+  }
+}

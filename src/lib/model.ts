@@ -70,12 +70,13 @@ export interface AuthenticateOpts {
   /**
    * TRUE: always yield next, even if no valid Authorization header was found
    */
-  passthrough: boolean
-
+  passthrough: boolean | passthroughCallback
 }
 
 export type JwtToken = string
 export type JwtTokenDecoded = string | object
+export type JwtPayload = string | Buffer | object
+
 export type VerifySecret = string | Buffer
 export type VerifyOpts = Omit<VerifyOptions, 'maxAge'>
 export type DecodeRet = null | string | JsonType
@@ -87,8 +88,8 @@ export interface DecodeComplete {
 
 export type MiddlewarePathPattern = string | RegExp | PathPatternFunc | (string | RegExp | PathPatternFunc)[]
 export type PathPatternFunc = (ctx: Context) => boolean
+export type passthroughCallback = (ctx: Context) => Promise<boolean>
 
-export type JwtPayload = string | Buffer | object
 
 /** Value of key-value pairs object */
 export type PlainJsonValueType = boolean | number | string | null | undefined
