@@ -16,6 +16,7 @@ import { initialJwtOptions, JwtMsg } from '../../lib/config'
 import { Jwt } from '../../lib/jwt'
 
 
+/** jwt Middleware Factory */
 export default (config: JwtConfig): EggMiddleware => {
   const jwtmw = (ctx: Context, next: () => Promise<void>) => {
     const opts: Required<JwtOptions> = {
