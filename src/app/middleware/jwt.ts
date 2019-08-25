@@ -12,7 +12,7 @@ import {
   VerifySecret,
 } from '../../lib/model'
 import { resolveFromAuthorizationHeader, resolveFromCookies } from '../../lib/resolvers'
-import { initialJwtOptions } from '../../lib/config'
+import { initialJwtOptions, JwtMsg } from '../../lib/config'
 import { Jwt } from '../../lib/jwt'
 
 
@@ -40,7 +40,7 @@ async function authenticate(
     const token = retrieveToken(ctx, options.authOpts)
 
     if (! token) {
-      ctx.throw(401, debug ? 'Token not found' : 'Authentication Failed')
+      ctx.throw(401, JwtMsg.TokenNotFound)
     }
 
     const secretSet: Set<VerifySecret> = genVerifySecretSet(
@@ -58,7 +58,7 @@ async function authenticate(
       ctx.state.jwtOriginalError = ex
     }
     else {
-      const msg = debug === true ? ex.message : 'Authentication Failed'
+      const msg = debug === true ? ex.message : JwtMsg.AuthFailed
       ctx.throw(401, msg, { originalError: ex })
     }
   }
@@ -77,16 +77,7 @@ function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToken {
     token = resolveFromAuthorizationHeader(authorization)
   }
 
-  if (token) {
-    return token
-  }
-  else {
-    if (options && options.passthrough === true) {
-      return ''
-    }
-    ctx.throw(401, 'Invalid Authorization header format. Format is "Authorization: Bearer <token>". token not found in Cookies or Header')
-  }
-  return ''
+  return token
 }
 
 /**
@@ -137,12 +128,12 @@ function validateToken(
 ): JwtTokenDecoded {
 
   if (! secretSet.size) {
-    throw new Error('VerifySecret not provided')
+    throw new Error(JwtMsg.VSceretInvalid)
   }
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
   if (typeof jwtImpl.verify !== 'function') {
-    throw new TypeError('jwt.verify is not a function')
+    throw new TypeError(JwtMsg.VerifyNotFunc)
   }
 
   let ret: JwtTokenDecoded | null = null
@@ -163,7 +154,7 @@ function validateToken(
   })
 
   if (ret === null) {
-    throw new Error('Token validation failed:\n' + msgs.join('\n'))
+    throw new Error(JwtMsg.TokenValidFailed + ':\n' + msgs.join('\n'))
   }
   return ret
 }

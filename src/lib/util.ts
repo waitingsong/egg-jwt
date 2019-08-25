@@ -1,6 +1,7 @@
 import * as assert from 'assert'
 
 import { JwtToken, JwtPayload, JwtOptions } from './model'
+import { JwtMsg } from './config'
 
 
 export function validateTokenString(input: JwtToken): void {
@@ -8,24 +9,24 @@ export function validateTokenString(input: JwtToken): void {
     assert(input.length > 0)
   }
   else {
-    throw new TypeError('Value of input token invalid.')
+    throw new TypeError(JwtMsg.InvalidInput)
   }
 }
 
 
 export function validatePayload(input: JwtPayload): void {
   if (typeof input === 'string') {
-    assert(input.length > 0, 'Value of secret is blank string.')
+    assert(input.length > 0, JwtMsg.InvalidInputString)
     return
   }
   else if (Buffer.isBuffer(input)) {
-    assert(input.length > 0, 'Value of secrect is empty Buffer.')
+    assert(input.length > 0, JwtMsg.InvalidInputBuffer)
   }
   else if (typeof input === 'object') {
     assert(Object.keys(input).length > 0)
   }
   else {
-    throw new TypeError('Value of sign secret is invalid.')
+    throw new TypeError(JwtMsg.InvalidInput)
   }
 
 }
@@ -33,12 +34,11 @@ export function validatePayload(input: JwtPayload): void {
 
 export function validateSignSecret(input: JwtOptions['secret']): void {
   if (typeof input === 'string') {
-    // throw new Error('Blank value')
-    assert(input.length > 0, 'Value of secret is blank string.')
+    assert(input.length > 0, JwtMsg.InvalidInputString)
     return
   }
   else if (Buffer.isBuffer(input)) {
-    assert(input.length > 0, 'Value of secrect is empty Buffer.')
+    assert(input.length > 0, JwtMsg.InvalidInputBuffer)
   }
   else if (typeof input === 'object' && input) {
     assert(Object.keys(input).length > 0)
@@ -46,7 +46,7 @@ export function validateSignSecret(input: JwtOptions['secret']): void {
     assert(typeof input.passphrase === 'string')
   }
   else {
-    throw new TypeError('Value of sign secret is invalid.')
+    throw new TypeError(JwtMsg.InvalidInput)
   }
 }
 
@@ -56,15 +56,15 @@ export function validateVerifySecret(input: JwtOptions['verifySecret']): void {
     return
   }
   else if (typeof input === 'string') {
-    assert(input.length > 0, 'Value of secret is blank string.')
+    assert(input.length > 0, JwtMsg.InvalidInputString)
   }
   else if (Buffer.isBuffer(input)) {
-    assert(input.length > 0, 'Value of secrect is empty Buffer.')
+    assert(input.length > 0, JwtMsg.InvalidInputBuffer)
   }
   // else if (typeof input === 'function') { // promise callback
   //   return
   // }
   else {
-    throw new TypeError('Value of sign secret is invalid.')
+    throw new TypeError(JwtMsg.InvalidInput)
   }
 }
