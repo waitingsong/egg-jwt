@@ -1,5 +1,6 @@
 import { basename } from '@waiting/shared-core'
 import * as assert from 'power-assert'
+import { Context } from 'egg'
 
 import { JwtConfig, jwtMiddlewareFactorey } from '../src'
 import { initialConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'
@@ -7,7 +8,6 @@ import { parseConfig } from '../src/lib/util'
 
 import { token1 } from './test.config'
 import { createContext, createNextCb } from './test.util'
-import { Context } from 'egg';
 
 
 const filename = basename(__filename)
