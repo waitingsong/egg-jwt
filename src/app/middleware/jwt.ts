@@ -116,10 +116,12 @@ function validateToken(
   config: JwtOptions,
 ): JwtTokenDecoded {
 
+  /* istanbul ignore next */
   if (! secretSet.size) {
     throw new Error(JwtMsg.VSceretInvalid)
   }
 
+  /* istanbul ignore next */
   // eslint-disable-next-line @typescript-eslint/unbound-method
   if (typeof jwtImpl.verify !== 'function') {
     throw new TypeError(JwtMsg.VerifyNotFunc)
