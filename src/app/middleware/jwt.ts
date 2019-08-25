@@ -2,14 +2,21 @@
 import { Context } from 'egg'
 
 import {
-  JwtConfig, VerifySecret, SignSecret, JwtToken, AuthenticateOpts, JwtTokenDecoded, JwtOptions,
+  AuthenticateOpts,
+  EggMiddleware,
+  JwtConfig,
+  JwtToken,
+  JwtTokenDecoded,
+  JwtOptions,
+  SignSecret,
+  VerifySecret,
 } from '../../lib/model'
 import { resolveFromAuthorizationHeader, resolveFromCookies } from '../../lib/resolvers'
 import { initialJwtOptions } from '../../lib/config'
 import { Jwt } from '../../lib/jwt'
 
 
-export default (config: JwtConfig) => {
+export default (config: JwtConfig): EggMiddleware => {
   const jwtmw = (ctx: Context, next: () => Promise<void>) => {
     const opts: Required<JwtOptions> = {
       ...initialJwtOptions,
@@ -178,3 +185,11 @@ async function parseByPassthrough(
     return false
   }
 }
+
+// only for npm run cov
+declare module 'egg' {
+  interface Application {
+    jwt: Jwt
+  }
+}
+

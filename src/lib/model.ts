@@ -100,3 +100,5 @@ export type PlainJsonValueType = boolean | number | string | null | undefined
 export interface JsonType {
   [key: string]: PlainJsonValueType | PlainJsonValueType[] | JsonType | JsonType[]
 }
+
+export type EggMiddleware = (ctx: Context, next: () => Promise<void>) => Promise<void>
