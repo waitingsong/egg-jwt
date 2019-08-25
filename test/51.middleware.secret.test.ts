@@ -18,10 +18,6 @@ describe(filename, () => {
 
   describe('Should middleware works with secret', () => {
     it('string', async () => {
-      const config: JwtConfig = parseConfig(initialConfig)
-      config.client.secret = secret
-      const mw = jwtMiddlewareFactorey(config)
-
       const props = {
         header: {
           authorization: `${schemePrefix} ${token1}`,
@@ -29,17 +25,15 @@ describe(filename, () => {
       }
       const ctx = createContext(props)
       const next = createNextCb(ctx)
-
-      assert(config.client.debug !== true)
-
-      await mw(ctx, next)
-    })
-
-    it('string by ctx.state.secret', async () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.secret = secret
       const mw = jwtMiddlewareFactorey(config)
 
+      assert(config.client.debug !== true)
+      await mw(ctx, next)
+    })
+
+    it('string by ctx.state.secret', async () => {
       const props = {
         header: {
           authorization: `${schemePrefix} ${token1}`,
@@ -50,6 +44,9 @@ describe(filename, () => {
       }
       const ctx = createContext(props)
       const next = createNextCb(ctx)
+      const config: JwtConfig = parseConfig(initialConfig)
+      config.client.secret = secret
+      const mw = jwtMiddlewareFactorey(config)
 
       await mw(ctx, next)
     })

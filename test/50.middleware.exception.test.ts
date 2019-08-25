@@ -15,11 +15,10 @@ describe(filename, () => {
 
   describe('Should middleware works with exception', () => {
     it('w/o token', async () => {
-      const config: JwtConfig = parseConfig(initialConfig)
-      const mw = jwtMiddlewareFactorey(config)
-
       const ctx = createContext()
       const next = createNextCb(ctx)
+      const config: JwtConfig = parseConfig(initialConfig)
+      const mw = jwtMiddlewareFactorey(config)
 
       try {
         await mw(ctx, next)
@@ -31,11 +30,11 @@ describe(filename, () => {
       assert(false, 'Should throw error but NOT')
     })
     it('w/o token debug', async () => {
+      const ctx = createContext()
+      const next = createNextCb(ctx)
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.debug = true
       const mw = jwtMiddlewareFactorey(config)
-      const ctx = createContext()
-      const next = createNextCb(ctx)
 
       try {
         await mw(ctx, next)
@@ -47,11 +46,10 @@ describe(filename, () => {
       assert(false, 'Should throw error but NOT')
     })
     it('w/o token again', async () => {
-      const config: JwtConfig = parseConfig(initialConfig)
-      const mw = jwtMiddlewareFactorey(config)
-
       const ctx = createContext()
       const next = createNextCb(ctx)
+      const config: JwtConfig = parseConfig(initialConfig)
+      const mw = jwtMiddlewareFactorey(config)
 
       assert(config.client.debug !== true)
 
@@ -66,9 +64,6 @@ describe(filename, () => {
     })
 
     it('w/o secret', async () => {
-      const config: JwtConfig = parseConfig(initialConfig)
-      const mw = jwtMiddlewareFactorey(config)
-
       const props = {
         header: {
           authorization: `${schemePrefix} ${token1}`,
@@ -76,6 +71,8 @@ describe(filename, () => {
       }
       const ctx = createContext(props)
       const next = createNextCb(ctx)
+      const config: JwtConfig = parseConfig(initialConfig)
+      const mw = jwtMiddlewareFactorey(config)
 
       assert(config.client.debug !== true)
 
@@ -89,10 +86,6 @@ describe(filename, () => {
       assert(false, 'Should throw error but NOT')
     })
     it('w/o secret debug', async () => {
-      const config: JwtConfig = parseConfig(initialConfig)
-      config.client.debug = true
-      const mw = jwtMiddlewareFactorey(config)
-
       const props = {
         header: {
           authorization: `${schemePrefix} ${token1}`,
@@ -100,6 +93,9 @@ describe(filename, () => {
       }
       const ctx = createContext(props)
       const next = createNextCb(ctx)
+      const config: JwtConfig = parseConfig(initialConfig)
+      config.client.debug = true
+      const mw = jwtMiddlewareFactorey(config)
 
       try {
         await mw(ctx, next)
