@@ -42,6 +42,7 @@ export interface JwtConfig {
 export interface JwtOptions {
   /** Authentication options for middleware */
   authOpts?: AuthenticateOpts
+  /** Ignored if authOpts.passthrought true */
   debug?: boolean
   decodeOpts?: DecodeOpts
   /**
@@ -68,7 +69,8 @@ export interface AuthenticateOpts {
    */
   key: 'user' | string
   /**
-   * TRUE: always yield next, even if no valid Authorization header was found
+   * TRUE: always yield next, even if no valid Authorization header was found,
+   * And ignore value of JwtOptions.debug
    */
   passthrough: boolean | passthroughCallback
 }
