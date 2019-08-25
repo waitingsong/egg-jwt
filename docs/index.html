@@ -112,6 +112,7 @@
 				</a>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { provide, plugin } <span class="hljs-keyword">from</span> <span class="hljs-string">'midway'</span>
 <span class="hljs-keyword">import</span> { Jwt } <span class="hljs-keyword">from</span> <span class="hljs-string">'@waiting/egg-jwt'</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> assert <span class="hljs-keyword">from</span> <span class="hljs-string">'assert'</span>
 
 <span class="hljs-meta">@provide</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> UserService {
@@ -122,14 +123,16 @@
 
   <span class="hljs-meta">@get</span>(<span class="hljs-string">'/siginup'</span>)
   <span class="hljs-keyword">public</span> signup(ctx: Context) {
-    <span class="hljs-keyword">const</span> token = <span class="hljs-keyword">this</span>.jwt.sign({ foo: <span class="hljs-string">'bar'</span>, iat: <span class="hljs-number">1566629919</span> })
+    <span class="hljs-keyword">const</span> payload = { foo: <span class="hljs-string">'bar'</span>, iat: <span class="hljs-number">1566629919</span> }
+    <span class="hljs-keyword">const</span> token = <span class="hljs-keyword">this</span>.jwt.sign(payload)
     <span class="hljs-keyword">const</span> valid = <span class="hljs-keyword">this</span>.jwt.verify(token)
-    ctx.body = <span class="hljs-string">`\ntoken: <span class="hljs-subst">${token}</span>`</span>
+    assert.deepStrictEqual(valid, payload)
+    ctx.body = <span class="hljs-string">`\nToken: <span class="hljs-subst">${token}</span>`</span>
   }
 
   <span class="hljs-meta">@get</span>(<span class="hljs-string">'/'</span>)
   <span class="hljs-keyword">public</span> index(ctx: Context): <span class="hljs-built_in">void</span> {
-    ctx.body = <span class="hljs-string">`\npayload: <span class="hljs-subst">${ctx.state &amp;&amp; ctx.state.user ? JSON.stringify(ctx.state.user) : 'not found'}</span>`</span>
+    ctx.body = <span class="hljs-string">`\nPayload: <span class="hljs-subst">${ctx.state &amp;&amp; ctx.state.user ? JSON.stringify(ctx.state.user) : 'Not found'}</span>`</span>
   }
 
 }</code></pre>
@@ -185,6 +188,9 @@ curl 127.0.0.1:7001/ \
 						<a href="globals.html#decoderet" class="tsd-kind-icon">Decode<wbr>Ret</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#eggmiddleware" class="tsd-kind-icon">Egg<wbr>Middleware</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#jwtpayload" class="tsd-kind-icon">Jwt<wbr>Payload</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
@@ -207,6 +213,9 @@ curl 127.0.0.1:7001/ \
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#verifysecret" class="tsd-kind-icon">Verify<wbr>Secret</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#passthroughcallback" class="tsd-kind-icon">passthrough<wbr>Callback</a>
 					</li>
 				</ul>
 			</nav>
