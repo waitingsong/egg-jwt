@@ -46,7 +46,7 @@ async function authenticate(
     const secretSet: Set<VerifySecret> = genVerifySecretSet(
       options.secret,
       options.verifySecret,
-      ctx.state.secret,
+      ctx.state ? ctx.state.secret : void 0,
     )
 
     const decoded = validateToken(ctx.app.jwt, token, secretSet, options)

@@ -2,8 +2,8 @@ import { basename } from '@waiting/shared-core'
 import * as assert from 'power-assert'
 import { Context } from 'egg'
 
-import { JwtConfig, jwtMiddlewareFactorey } from '../src'
-import { initialConfig, JwtMsg } from '../src/lib/config'
+import { JwtConfig, jwtMiddlewareFactorey, Jwt } from '../src'
+import { initialConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'
 import { parseConfig } from '../src/lib/util'
 
 import {
@@ -20,7 +20,8 @@ describe(filename, () => {
     it('w/o token', async () => {
       const config: JwtConfig = parseConfig(initialConfig)
       const mw = jwtMiddlewareFactorey(config)
-      const ctx = createCtx()
+
+      const ctx = createContext()
       const next = createNextCb()
 
       try {
@@ -32,12 +33,11 @@ describe(filename, () => {
       }
       assert(false, 'Should throw error but NOT')
     })
-
     it('w/o token debug', async () => {
-      const configDebug: JwtConfig = parseConfig(initialConfig)
-      configDebug.client.debug = true
-      const mw = jwtMiddlewareFactorey(configDebug)
-      const ctx = createCtx()
+      const config: JwtConfig = parseConfig(initialConfig)
+      config.client.debug = true
+      const mw = jwtMiddlewareFactorey(config)
+      const ctx = createContext()
       const next = createNextCb()
 
       try {
@@ -49,13 +49,14 @@ describe(filename, () => {
       }
       assert(false, 'Should throw error but NOT')
     })
-
     it('w/o token again', async () => {
       const config: JwtConfig = parseConfig(initialConfig)
-      assert(config.client.debug !== true)
       const mw = jwtMiddlewareFactorey(config)
-      const ctx = createCtx()
+
+      const ctx = createContext()
       const next = createNextCb()
+
+      assert(config.client.debug !== true)
 
       try {
         await mw(ctx, next)
@@ -67,15 +68,67 @@ describe(filename, () => {
       assert(false, 'Should throw error but NOT')
     })
 
+    it('w/o secret', async () => {
+      const config: JwtConfig = parseConfig(initialConfig)
+      const mw = jwtMiddlewareFactorey(config)
+
+      const props = {
+        header: {
+          authorization: `${schemePrefix} ${token1}`,
+        },
+      }
+      const ctx = createContext(props)
+      const next = createNextCb()
+
+      assert(config.client.debug !== true)
+
+      try {
+        await mw(ctx, next)
+      }
+      catch (ex) {
+        const msg: string = ex.message
+        return assert(msg.includes('401') && msg.includes(JwtMsg.AuthFailed))
+      }
+      assert(false, 'Should throw error but NOT')
+    })
+    it('w/o secret debug', async () => {
+      const config: JwtConfig = parseConfig(initialConfig)
+      config.client.debug = true
+      const mw = jwtMiddlewareFactorey(config)
+
+      const props = {
+        header: {
+          authorization: `${schemePrefix} ${token1}`,
+        },
+      }
+      const ctx = createContext(props)
+      const next = createNextCb()
+
+      try {
+        await mw(ctx, next)
+      }
+      catch (ex) {
+        const msg: string = ex.message
+        return assert(msg.includes('401') && msg.includes(JwtMsg.TokenValidFailed))
+      }
+      assert(false, 'Should throw error but NOT')
+    })
+
+
   })
 })
 
 
-function createCtx(): Context {
+function createContext(props?: object): Context {
   const ctx = {
     throw: (status: number, message: string) => {
       throw new Error(`${status}:${message}`)
     },
+    state: {},
+    app: {
+      jwt: new Jwt(initialJwtOptions),
+    },
+    ...props,
   } as Context
 
   return ctx
