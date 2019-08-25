@@ -22,18 +22,22 @@ export function parseConfig(input: JwtConfig): JwtConfig {
     enable: initialConfig.enable,
   } as JwtConfig
 
+  /* istanbul ignore else */
   if (typeof input.agent === 'boolean') {
     config.agent = input.agent
   }
 
+  /* istanbul ignore else */
   if (typeof input.enable === 'boolean') {
     config.enable = input.enable
   }
 
+  /* istanbul ignore else */
   if (typeof input.ignore !== 'undefined') {
     config.ignore = input.ignore
   }
 
+  /* istanbul ignore else */
   if (typeof input.match !== 'undefined') {
     config.match = input.match
   }

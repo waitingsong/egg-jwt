@@ -97,12 +97,15 @@ export class Jwt {
 
     let opts: DecodeOpts | undefined
 
+    /* istanbul ignore else */
     if (this.config.decodeOpts && Object.keys(this.config.decodeOpts).length) {
       opts = { ...this.config.decodeOpts }
     }
+    /* istanbul ignore else */
     if (typeof options === 'object' && options) {
       opts = { ...options }
     }
+    /* istanbul ignore else */
     if (opts) {
       opts.complete = true
     }

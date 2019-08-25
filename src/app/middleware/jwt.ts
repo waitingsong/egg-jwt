@@ -11,10 +11,7 @@ import {
   SignSecret,
   VerifySecret,
 } from '../../lib/model'
-import {
-  resolveFromAuthorizationHeader,
-  resolveFromCookies,
-} from '../../lib/resolvers'
+import { retrieveToken } from '../../lib/resolvers'
 import { JwtMsg } from '../../lib/config'
 import { Jwt } from '../../lib/jwt'
 import { parseOptions } from '../../lib/util'
@@ -41,6 +38,7 @@ async function authenticate(
   try {
     const token = retrieveToken(ctx, options.authOpts)
 
+    /* istanbul ignore else */
     if (! token) {
       ctx.throw(401, JwtMsg.TokenNotFound)
     }
@@ -69,19 +67,6 @@ async function authenticate(
 }
 
 
-function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToken {
-  let token = resolveFromCookies(ctx.cookies, options ? options.cookie : false)
-
-  if (! token) {
-    const authorization = ctx.header && ctx.header.authorization
-      ? ctx.header.authorization
-      : ''
-    token = resolveFromAuthorizationHeader(authorization)
-  }
-
-  return token
-}
-
 /**
  * Generate secrets for verify,
  * Note: use ctxSecret only if available
@@ -92,6 +77,7 @@ function genVerifySecretSet(
   ctxSecret?: unknown,
 ): Set<VerifySecret> {
 
+  /* istanbul ignore else */
   if ((typeof ctxSecret === 'string' || Buffer.isBuffer(ctxSecret)) && ctxSecret) {
     return new Set([ctxSecret])
   }
@@ -106,6 +92,7 @@ function genVerifySecretSet(
 function parseSecret(input?: JwtOptions['secret'] | JwtOptions['verifySecret']): Set<VerifySecret> {
   const ret: Set<VerifySecret> = new Set()
 
+  /* istanbul ignore else */
   if (typeof input === 'string') {
     ret.add(input)
   }
@@ -155,6 +142,7 @@ function validateToken(
     }
   })
 
+  /* istanbul ignore else */
   if (ret === null) {
     throw new Error(JwtMsg.TokenValidFailed + ':\n' + msgs.join('\n'))
   }

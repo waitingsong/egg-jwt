@@ -5,6 +5,21 @@ import { JwtToken, AuthenticateOpts } from './model'
 import { schemePrefix } from './config'
 
 
+export function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToken {
+  let token = resolveFromCookies(ctx.cookies, options ? options.cookie : false)
+
+  /* istanbul ignore else */
+  if (! token) {
+    const authorization = ctx.header && ctx.header.authorization
+      ? ctx.header.authorization
+      : ''
+    token = resolveFromAuthorizationHeader(authorization)
+  }
+
+  return token
+}
+
+
 /**
  * Attempts to parse the token from the Authorization header,
  * This function checks the Authorization header for a `Bearer <token>` pattern and return the token section
