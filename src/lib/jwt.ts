@@ -15,6 +15,7 @@ import {
   DecodeComplete,
 } from './model'
 import {
+  parseOptions,
   validateSignSecret,
   validateVerifySecret,
   validateTokenString,
@@ -27,7 +28,7 @@ export class Jwt {
   private readonly config: JwtOptions
 
   constructor(config: JwtOptions) {
-    this.config = { ...config }
+    this.config = parseOptions(config)
   }
 
 
