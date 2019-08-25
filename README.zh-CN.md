@@ -59,6 +59,7 @@ export const jwt: JwtConfig = {
 ```ts
 import { provide, plugin } from 'midway'
 import { Jwt } from '@waiting/egg-jwt'
+import * as assert from 'assert'
 
 @provide()
 export class UserService {
@@ -69,14 +70,16 @@ export class UserService {
 
   @get('/siginup')
   public signup(ctx: Context) {
-    const token = this.jwt.sign({ foo: 'bar', iat: 1566629919 })
+    const payload = { foo: 'bar', iat: 1566629919 }
+    const token = this.jwt.sign(payload)
     const valid = this.jwt.verify(token)
-    ctx.body = `\ntoken: ${token}`
+    assert.deepStrictEqual(valid, payload)
+    ctx.body = `\nToken: ${token}`
   }
 
   @get('/')
   public index(ctx: Context): void {
-    ctx.body = `\npayload: ${ctx.state && ctx.state.user ? JSON.stringify(ctx.state.user) : 'not found'}`
+    ctx.body = `\nPayload: ${ctx.state && ctx.state.user ? JSON.stringify(ctx.state.user) : 'Not found'}`
   }
 
 }
