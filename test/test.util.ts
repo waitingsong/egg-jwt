@@ -4,7 +4,7 @@ import { Context } from 'egg'
 import { Jwt } from '../src'
 import { initialJwtOptions } from '../src/lib/config'
 
-import { payload1 } from './test.config'
+import { payload1, testRedirectURL } from './test.config'
 
 
 export function createContext(props?: object): Context {
@@ -18,6 +18,10 @@ export function createContext(props?: object): Context {
     },
     ...props,
   } as Context
+
+  ctx.redirect = (url: string) => {
+    assert(url && url.includes(testRedirectURL))
+  }
 
   return ctx
 }

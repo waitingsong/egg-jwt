@@ -10,6 +10,7 @@ import {
   JwtOptions,
   SignSecret,
   VerifySecret,
+  RedirectURL,
 } from '../../lib/model'
 import { retrieveToken } from '../../lib/resolvers'
 import { JwtMsg } from '../../lib/config'
@@ -53,9 +54,14 @@ async function authenticate(
     ctx.state[key] = decoded
   }
   catch (ex) {
-    if (await parseByPassthrough(ctx, passthrough) === true) {
+    const pass = await parseByPassthrough(ctx, passthrough)
+    if (pass === true) {
       // lets downstream middlewares handle JWT exceptions
       ctx.state.jwtOriginalError = ex
+    }
+    else if (typeof pass === 'string' && pass.length > 0) {
+      ctx.redirect(pass)
+      return
     }
     else {
       const msg = debug === true ? ex.message : JwtMsg.AuthFailed
@@ -155,17 +161,21 @@ function validateToken(
 /** Compute passthrough state */
 async function parseByPassthrough(
   ctx: Context,
-  passthrough: AuthenticateOpts['passthrough'],
-): Promise<boolean> {
+  input: AuthenticateOpts['passthrough'],
+): Promise<boolean | RedirectURL> {
 
-  if (passthrough === true) {
-    return true
-  }
-  else if (typeof passthrough === 'function') {
-    return passthrough(ctx)
-  }
-  else {
-    return false
+  switch (typeof input) {
+    case 'boolean':
+      return input
+
+    case 'string':
+      return input
+
+    case 'function':
+      return input(ctx)
+
+    default:
+      return false
   }
 }
 

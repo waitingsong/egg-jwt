@@ -69,10 +69,12 @@ export interface AuthenticateOpts {
    */
   key: 'user' | string
   /**
-   * TRUE: always yield next, even if no valid Authorization header was found,
-   * And ignore value of JwtOptions.debug
+   * - false (Default): throw error
+   * - true: always yield next, even if no valid Authorization header was found,
+   *    and ignore value of JwtOptions.debug
+   * - <RedirectURL>: redirect and without yield next
    */
-  passthrough: boolean | passthroughCallback
+  passthrough: boolean | RedirectURL | passthroughCallback
 }
 
 export type JwtToken = string
@@ -90,7 +92,8 @@ export interface DecodeComplete {
 
 export type MiddlewarePathPattern = string | RegExp | PathPatternFunc | (string | RegExp | PathPatternFunc)[]
 export type PathPatternFunc = (ctx: Context) => boolean
-export type passthroughCallback = (ctx: Context) => Promise<boolean>
+export type RedirectURL = string
+export type passthroughCallback = (ctx: Context) => Promise<boolean | RedirectURL>
 
 
 /** Value of key-value pairs object */
