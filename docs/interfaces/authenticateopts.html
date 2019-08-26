@@ -130,16 +130,20 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="passthrough" class="tsd-anchor"></a>
 					<h3>passthrough</h3>
-					<div class="tsd-signature tsd-kind-icon">passthrough<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><a href="../globals.html#passthroughcallback" class="tsd-signature-type">passthroughCallback</a></div>
+					<div class="tsd-signature tsd-kind-icon">passthrough<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><a href="../globals.html#redirecturl" class="tsd-signature-type">RedirectURL</a><span class="tsd-signature-symbol"> | </span><a href="../globals.html#passthroughcallback" class="tsd-signature-type">passthroughCallback</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/waitingsong/egg-jwt/blob/master/src/lib/model.ts#L75">lib/model.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/waitingsong/egg-jwt/blob/master/src/lib/model.ts#L77">lib/model.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>TRUE: always yield next, even if no valid Authorization header was found,
-							And ignore value of JwtOptions.debug</p>
+							<ul>
+								<li>false (Default): throw error</li>
+								<li>true: always yield next, even if no valid Authorization header was found,
+								and ignore value of JwtOptions.debug</li>
+								<li><RedirectURL>: redirect and without yield next</li>
+							</ul>
 						</div>
 					</div>
 				</section>
@@ -208,6 +212,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#plainjsonvaluetype" class="tsd-kind-icon">Plain<wbr>Json<wbr>Value<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#redirecturl" class="tsd-kind-icon">RedirectURL</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#verifyopts" class="tsd-kind-icon">Verify<wbr>Opts</a>
