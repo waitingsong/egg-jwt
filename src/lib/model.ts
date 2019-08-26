@@ -28,13 +28,13 @@ export interface JwtConfig {
   /**
    * match and ignore are exclusive exists
    * Default: undefined for matching all routings
-   * Caution: '/' will match all!
+   * Caution: '/' will match all, /^\/$/ matches only root !
    * @see https://github.com/eggjs/egg-path-matching
    */
   match?: MiddlewarePathPattern
   /**
    * match and ignore are exclusive exists
-   * Caution: '/' will match all!
+   * Caution: '/' will match all, /^\/$/ matches only root !
    */
   ignore?: MiddlewarePathPattern
 }
