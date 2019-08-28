@@ -89,7 +89,7 @@ export class Jwt {
    * Decode token
    * @param options if specified then value of complete always be TRUE
    */
-  public decode<T extends DecodeOpts | undefined>(
+  public decode<T extends DecodeOpts | undefined = undefined>(
     token: JwtToken,
     options?: T,
   ): undefined extends T ? DecodeRet : DecodeComplete {
@@ -112,7 +112,7 @@ export class Jwt {
     }
 
     const ret = jwt.decode(token, opts)
-    return ret as void extends T ? DecodeRet : DecodeComplete
+    return ret as undefined extends T ? DecodeRet : DecodeComplete
   }
 
 }
