@@ -132,7 +132,7 @@
 
   <span class="hljs-meta">@get</span>(<span class="hljs-string">'/'</span>)
   <span class="hljs-keyword">public</span> index(ctx: Context): <span class="hljs-built_in">void</span> {
-    ctx.body = <span class="hljs-string">`\nPayload: <span class="hljs-subst">${ctx.state &amp;&amp; ctx.state.user ? JSON.stringify(ctx.state.user) : 'Not found'}</span>`</span>
+    ctx.body = <span class="hljs-string">`\nPayload: <span class="hljs-subst">${ctx.state &amp;&amp; ctx.state.user ? <span class="hljs-built_in">JSON</span>.stringify(ctx.state.user) : <span class="hljs-string">'Not found'</span>}</span>`</span>
   }
 
 }</code></pre>
