@@ -1,13 +1,15 @@
 import { basename } from '@waiting/shared-core'
 import * as assert from 'power-assert'
 
-import { Jwt, initialJwtOptions, JwtOptions, DecodeComplete, DecodeRet } from '../src/index'
+import { Jwt, initialJwtOptions, JwtOptions } from '../src/index'
 
 import {
   secret,
   payload1,
   signature1,
   token1,
+  PayloadSig1,
+  PayloadExt1,
 } from './test.config'
 
 
@@ -16,14 +18,34 @@ const filename = basename(__filename)
 describe(filename, () => {
 
   describe('Should Jwt:decode() works', () => {
-    it('normal', () => {
+    it('normal string', () => {
+      const opts: JwtOptions = {
+        ...initialJwtOptions,
+      }
+      const jwt = new Jwt(opts)
+      const input = 'fooabc' + Math.random().toString()
+      const token = jwt.sign(input, secret)
+      const ret = jwt.decode<string>(token)
+
+      assert(ret.payload === input)
+    })
+
+    it('various generics types', () => {
       const opts: JwtOptions = {
         ...initialJwtOptions,
       }
       const jwt = new Jwt(opts)
       const token = jwt.sign(payload1, secret)
-      const ret: DecodeRet = jwt.decode(token)
-      assert.deepStrictEqual(ret, payload1)
+
+      const ret1 = jwt.decode<PayloadSig1>(token) // index signature
+      const ret2 = jwt.decode<PayloadExt1>(token) // extends from
+      const ret3 = jwt.decode<typeof payload1>(token) // pick type
+      const ret4 = jwt.decode(token) // default jsont type
+
+      assert.deepStrictEqual(ret1.payload, payload1)
+      assert.deepStrictEqual(ret2.payload, payload1)
+      assert.deepStrictEqual(ret3.payload, payload1)
+      assert.deepStrictEqual(ret4.payload, payload1)
     })
 
     it('pass secret', () => {
@@ -32,7 +54,7 @@ describe(filename, () => {
       }
       const jwt = new Jwt(opts)
       const token = jwt.sign(payload1, secret)
-      const ret: DecodeComplete = jwt.decode(token, { complete: true })
+      const ret = jwt.decode<PayloadSig1>(token)
       const { header, payload, signature } = ret
 
       assert(header && header.alg === 'HS256')

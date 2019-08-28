@@ -1,5 +1,20 @@
+import { JsonType } from '@waiting/shared-types'
+
 
 export const secret = '123456abc'
+
+/** Type with index signature */
+export interface PayloadSig1 {
+  foo: string
+  iat: number
+  [index: string]: string | number
+}
+/** Type extends from JsonType */
+export interface PayloadExt1 extends JsonType {
+  foo: string
+  iat: number
+}
+
 
 export const payload1 = { foo: 'bar', iat: 1566629919 }
 export const signature1 = 'PZkACzct30IcrymoodYlW0LW0Fc1r6Hs1l8yOZSeNpk'

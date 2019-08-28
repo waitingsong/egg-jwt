@@ -7,9 +7,11 @@ import {
   Secret as SignSecret,
   VerifyOptions,
 } from 'jsonwebtoken'
+import { JsonType } from '@waiting/shared-types'
 
 
 export {
+  JsonType,
   DecodeOpts,
   JwtHeader,
   SignOpts,
@@ -78,32 +80,21 @@ export interface AuthenticateOpts {
 }
 
 export type JwtToken = string
-export type JwtTokenDecoded = string | object
 export type JwtPayload = string | Buffer | object
+export type JwtDecodedPayload<T extends string | JsonType = JsonType> = T
+export interface JwtComplete<T extends string | JsonType = JsonType> {
+  header: JwtHeader
+  payload: JwtDecodedPayload<T>
+  signature: string
+}
 
 export type VerifySecret = string | Buffer
 export type VerifyOpts = Omit<VerifyOptions, 'maxAge'>
-export type DecodeRet = null | string | JsonType
-export interface DecodeComplete {
-  header: JwtHeader
-  payload: JwtPayload
-  signature: JwtToken
-}
 
 export type MiddlewarePathPattern = string | RegExp | PathPatternFunc | (string | RegExp | PathPatternFunc)[]
 export type PathPatternFunc = (ctx: Context) => boolean
 export type RedirectURL = string
 export type passthroughCallback = (ctx: Context) => Promise<boolean | RedirectURL>
 
-
-/** Value of key-value pairs object */
-export type PlainJsonValueType = boolean | number | string | null | undefined
-/**
- * Typeof JSON object parsed from Response data
- * simple key-value pairs object.
- */
-export interface JsonType {
-  [key: string]: PlainJsonValueType | PlainJsonValueType[] | JsonType | JsonType[]
-}
-
 export type EggMiddleware = (ctx: Context, next: () => Promise<void>) => Promise<void>
+

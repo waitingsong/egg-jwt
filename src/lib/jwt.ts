@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as jwt from 'jsonwebtoken'
+import { JsonType } from '@waiting/shared-types'
 
 import {
   JwtOptions,
   DecodeOpts,
-  DecodeRet,
   JwtPayload,
   JwtToken,
-  JwtTokenDecoded,
+  JwtDecodedPayload,
   SignSecret,
   SignOpts,
   VerifySecret,
   VerifyOpts,
-  DecodeComplete,
+  JwtComplete,
 } from './model'
 import {
   parseOptions,
@@ -62,11 +62,11 @@ export class Jwt {
   /**
    * @description using app.config.jwt.secret if secretOrPrivateKey is undefined or false
    */
-  public verify(
+  public verify<T extends string | JsonType = JsonType>(
     token: JwtToken,
     secretOrPrivateKey?: VerifySecret | false,
     options?: VerifyOpts,
-  ): JwtTokenDecoded {
+  ): JwtDecodedPayload<T> {
 
     if (! this) { throw new TypeError('Should call with class name, such as jwt.foo()') }
 
@@ -82,37 +82,31 @@ export class Jwt {
     validateVerifySecret(secret)
 
     const ret = jwt.verify(token, secret, opts)
-    return ret
+    return ret as JwtDecodedPayload<T>
   }
 
   /**
-   * Decode token
-   * @param options if specified then value of complete always be TRUE
+   * Decode token,
+   * Warning: This will not verify whether the signature is valid.
+   * You should not use this for untrusted messages. You most likely want to use jwt.verify instead
+   *
+   * @param options value of complete always be TRUE
    */
-  public decode<T extends DecodeOpts | undefined = undefined>(
+  public decode<T extends string | JsonType = JsonType>(
     token: JwtToken,
-    options?: T,
-  ): undefined extends T ? DecodeRet : DecodeComplete {
+  ): JwtComplete<T> {
 
     if (! this) { throw new TypeError('Should call with class name, such as jwt.foo()') }
 
-    let opts: DecodeOpts | undefined
+    let opts: DecodeOpts = { complete: true }
 
     /* istanbul ignore else */
     if (this.config.decodeOpts && Object.keys(this.config.decodeOpts).length) {
       opts = { ...this.config.decodeOpts }
     }
-    /* istanbul ignore else */
-    if (typeof options === 'object' && options) {
-      opts = { ...options }
-    }
-    /* istanbul ignore else */
-    if (opts) {
-      opts.complete = true
-    }
 
     const ret = jwt.decode(token, opts)
-    return ret as undefined extends T ? DecodeRet : DecodeComplete
+    return ret as JwtComplete<T>
   }
 
 }

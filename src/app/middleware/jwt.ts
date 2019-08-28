@@ -6,7 +6,7 @@ import {
   EggMiddleware,
   JwtConfig,
   JwtToken,
-  JwtTokenDecoded,
+  JwtDecodedPayload,
   JwtOptions,
   SignSecret,
   VerifySecret,
@@ -120,7 +120,7 @@ function validateToken(
   token: JwtToken,
   secretSet: Set<VerifySecret>,
   config: JwtOptions,
-): JwtTokenDecoded {
+): JwtDecodedPayload {
 
   /* istanbul ignore next */
   if (! secretSet.size) {
@@ -133,7 +133,7 @@ function validateToken(
     throw new TypeError(JwtMsg.VerifyNotFunc)
   }
 
-  let ret: JwtTokenDecoded | null = null
+  let ret: JwtDecodedPayload | null = null
   const msgs: string[] = []
   Array.from(secretSet).some((secret) => {
     try {
@@ -154,7 +154,7 @@ function validateToken(
   if (ret === null) {
     throw new Error(JwtMsg.TokenValidFailed + ':\n' + msgs.join('\n'))
   }
-  return ret
+  return ret as JwtDecodedPayload
 }
 
 

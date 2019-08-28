@@ -59,6 +59,7 @@
     "all": true
   },
   "dependencies": {
+    "@waiting/shared-types": "^1.0.0",
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
@@ -70,6 +71,7 @@
     "@types/rimraf": "*",
     "@types/yargs": "^13.0.0",
     "@waiting/eslint-config": "^2.1.0",
+    "@waiting/shared-core": "^3.0.0",
     "coveralls": "^3.0.5",
     "cross-env": "^5.2.0",
     "egg": "^2.23.0",
