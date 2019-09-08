@@ -20,7 +20,6 @@ platform:
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - npm root -g
-  - npm i rollup typescript eslint nyc
   - npm install
 
 #services:
