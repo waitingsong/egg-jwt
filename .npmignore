@@ -4,6 +4,7 @@
 .config
 .coveralls.yml
 .editorconfig
+.eslintcache
 .githooks
 .nyc_output
 .travis.yml
