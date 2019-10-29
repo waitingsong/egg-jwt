@@ -57,6 +57,9 @@
   "engines": {
     "node": ">=10.16.0"
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -72,6 +75,7 @@
     "jslint": "eslint --fix --cache dist/**/*.js",
     "link_global": "npm link typescript",
     "lint": "eslint --fix --cache {src,test}/**/*.ts",
+    "lint:nofix": "eslint --cache {src,test}/**/*.ts",
     "postpublish": "git push origin --follow-tags",
     "prepublishOnly": "npm run clean && npm run build",
     "release": "standard-version -r",
