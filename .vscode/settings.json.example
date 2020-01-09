@@ -85,7 +85,7 @@
   "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "[typescript]": {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.formatOnPaste": true
   },
   "git.ignoreLimitWarning": true
