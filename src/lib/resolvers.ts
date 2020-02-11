@@ -25,8 +25,11 @@ export function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToke
       : ''
     if (authorization) {
       authorization = authorization.trimEnd()
+      token = resolveFromAuthorizationHeader(authorization)
     }
-    token = resolveFromAuthorizationHeader(authorization)
+    else {
+      token = ''
+    }
   }
 
   return token ? token : ''
