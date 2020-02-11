@@ -5,14 +5,25 @@ import { JwtToken, AuthenticateOpts } from './model'
 import { schemePrefix } from './config'
 
 
+/**
+ *
+ * Note: trim trailing white space from cookies/header
+ * according to node.js security since v10.19, v12.15
+ * @link https://nodejs.org/en/blog/vulnerability/february-2020-security-releases/
+ */
 export function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToken {
   let token = resolveFromCookies(ctx.cookies, options ? options.cookie : false)
 
+  token = token.trimEnd()
+
   /* istanbul ignore else */
   if (! token) {
-    const authorization = ctx.header && ctx.header.authorization
+    let authorization: string = ctx.header && ctx.header.authorization
       ? ctx.header.authorization
       : ''
+    if (authorization) {
+      authorization = authorization.trimEnd()
+    }
     token = resolveFromAuthorizationHeader(authorization)
   }
 
