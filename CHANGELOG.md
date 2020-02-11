@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/waitingsong/egg-jwt/compare/v2.0.0...v3.0.0) (2020-02-11)
+
+
+### Features
+
+* trim trailing white space from cookies/header ([0f9b97f](https://github.com/waitingsong/egg-jwt/commit/0f9b97fac586b90e2ec0ec58b8697e0e8b987a9f))
+
 ## [2.0.0](https://github.com/waitingsong/egg-jwt/compare/v1.2.0...v2.0.0) (2019-08-28)
 
 
