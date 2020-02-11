@@ -14,7 +14,9 @@ import { schemePrefix } from './config'
 export function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToken {
   let token = resolveFromCookies(ctx.cookies, options ? options.cookie : false)
 
-  token = token.trimEnd()
+  if (token) {
+    token = token.trimEnd()
+  }
 
   /* istanbul ignore else */
   if (! token) {
@@ -27,7 +29,7 @@ export function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToke
     token = resolveFromAuthorizationHeader(authorization)
   }
 
-  return token
+  return token ? token : ''
 }
 
 
@@ -63,7 +65,7 @@ export function resolveFromAuthorizationHeader(authorization: string): JwtToken 
 export function resolveFromCookies(
   cookies: Context['cookies'],
   cookieKey?: AuthenticateOpts['cookie'],
-): JwtToken {
+): JwtToken | undefined {
 
   const token = cookieKey && cookieKey.length > 0
     ? cookies.get(cookieKey)
