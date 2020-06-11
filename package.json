@@ -58,7 +58,7 @@
     "yargs": "15"
   },
   "engines": {
-    "node": ">=10.16.0"
+    "node": ">=12.13.0"
   },
   "files": [
     "dist"
