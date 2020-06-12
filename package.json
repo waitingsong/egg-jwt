@@ -38,7 +38,7 @@
     "@types/rimraf": "3",
     "@types/yargs": "15",
     "@waiting/eslint-config": "5",
-    "@waiting/shared-core": "3",
+    "@waiting/shared-core": "4",
     "coveralls": "3",
     "cross-env": "7",
     "eslint": "7",
