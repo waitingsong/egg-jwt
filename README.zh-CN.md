@@ -27,6 +27,12 @@ Edit `${app_root}/src/config/plugin.ts`:
 ```ts
 import { EggPlugin } from 'midway'
 
+export const jwt = {
+  enable: true,
+  package: '@waiting/egg-jwt',
+}
+
+// OR
 export default {
   jwt: {
     enable: true,
