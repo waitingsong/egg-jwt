@@ -1,36 +1,49 @@
 {
-  "name": "npm-base",
+  "name": "@waiting/egg-jwt",
   "author": "waiting",
-  "version": "0.0.1",
-  "description": "npm boilerplate",
+  "version": "3.0.1",
+  "description": "jwt plugin of egg for signing, verifying as plugin and authentication as middleware",
+  "eggPlugin": {
+    "name": "jwt"
+  },
   "keywords": [
-    "种子项目",
+    "midway",
+    "egg",
+    "eggPlugin",
+    "egg-plugin",
+    "jwt",
+    "authorization",
+    "authentication",
+    "header",
+    "cookies",
     "typescript",
     "ts"
   ],
   "bin": {},
   "browser": "",
   "es2015": "",
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./index.cjs.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
   "bugs": {
-    "url": "https://github.com/waitingsong/npm-base/issues"
+    "url": "https://github.com/waitingsong/egg-jwt/issues"
   },
-  "homepage": "https://github.com/waitingsong/npm-base#readme",
+  "homepage": "https://waitingsong.github.io/egg-jwt",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waitingsong/npm-base.git"
+    "url": "git+https://github.com/waitingsong/egg-jwt.git"
   },
   "license": "MIT",
   "dependencies": {
-    "rxjs": "^6.5.2"
+    "@waiting/shared-types": "^5.0.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@commitlint/cli": "11",
     "@commitlint/config-conventional": "11",
     "@rollup/plugin-commonjs": "16",
     "@rollup/plugin-node-resolve": "10",
+    "@types/jsonwebtoken": "^8.3.3",
     "@types/mocha": "8",
     "@types/node": "14",
     "@types/power-assert": "1",
@@ -41,6 +54,7 @@
     "@waiting/shared-core": "5",
     "coveralls": "3",
     "cross-env": "7",
+    "egg": "^2.23.0",
     "eslint": "7",
     "espower-typescript": "9",
     "intelli-espower-loader": "1",
@@ -61,7 +75,13 @@
     "node": ">=14.14.0"
   },
   "files": [
-    "dist"
+    "agent.*",
+    "app",
+    "app.*",
+    "config",
+    "dist",
+    "index.*",
+    "lib"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
