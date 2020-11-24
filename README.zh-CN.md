@@ -85,7 +85,7 @@ export class UserService {
 
   @get('/')
   public index(ctx: Context): void {
-    ctx.body = `\nPayload: ${ctx.state && ctx.state.user ? JSON.stringify(ctx.state.user) : 'Not found'}`
+    ctx.body = `\nPayload: ${ctx.jwtState && ctx.jwtState.data.user ? JSON.stringify(ctx.jwtState.data.user) : 'Not found'}`
   }
 
 }

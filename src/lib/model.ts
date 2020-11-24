@@ -69,7 +69,7 @@ export interface AuthenticateOpts {
    * You can still handle errors using ctx.state.jwtOriginalError.
    * Default: user
    */
-  key: 'user' | string
+  // key: 'user' | string
   /**
    * - false (Default): throw error
    * - true: always yield next, even if no valid Authorization header was found,
@@ -97,4 +97,18 @@ export type RedirectURL = string
 export type passthroughCallback = (ctx: Context) => Promise<boolean | RedirectURL>
 
 export type EggMiddleware = (ctx: Context, next: () => Promise<void>) => Promise<void>
+
+/** Bind on egg.Context.jwtState */
+export interface JwtState {
+  jwtOriginalError: Error
+  secret: unknown
+  /** Result */
+  user: JsonType
+}
+
+declare module 'egg' {
+  interface Context {
+    jwtState?: JwtState
+  }
+}
 

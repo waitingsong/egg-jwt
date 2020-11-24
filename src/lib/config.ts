@@ -6,7 +6,6 @@ export const middlewareName = 'jwt'
 
 export const initialAuthOpts: Readonly<AuthenticateOpts> = {
   cookie: false,
-  key: 'user',
   passthrough: false,
 }
 export const initialJwtOptions: Readonly<JwtOptions> = {

@@ -19,7 +19,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: true,
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -33,7 +32,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: true,
       }
       config.client.debug = true
@@ -48,7 +46,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: true,
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -67,7 +64,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: true,
       }
       config.client.debug = true
@@ -93,7 +89,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: passthroughCbTrue,
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -106,7 +101,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: passthroughCbTrue,
       }
       config.client.debug = true
@@ -126,7 +120,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: passthroughCbTrue,
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -144,7 +137,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: passthroughCbTrue,
       }
       config.client.debug = true
@@ -168,7 +160,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: testRedirectURL,
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -189,7 +180,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: passthroughCbURL,
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -210,7 +200,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: '',
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -236,7 +225,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: '',
       }
       config.client.debug = true
@@ -264,7 +252,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: passthroughCbBlank,
       }
       const mw = jwtMiddlewareFactorey(config)
@@ -290,7 +277,6 @@ describe(filename, () => {
       const config: JwtConfig = parseConfig(initialConfig)
       config.client.authOpts = {
         cookie: false,
-        key: 'user',
         passthrough: passthroughCbBlank,
       }
       config.client.debug = true

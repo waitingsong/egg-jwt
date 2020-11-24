@@ -11,6 +11,7 @@ import {
   SignSecret,
   VerifySecret,
   RedirectURL,
+  JwtState,
 } from '../../lib/model'
 import { retrieveToken } from '../../lib/resolvers'
 import { JwtMsg } from '../../lib/config'
@@ -34,7 +35,14 @@ async function authenticate(
 ): Promise<void> {
 
   const { debug } = options
-  const { key, passthrough } = options.authOpts as AuthenticateOpts
+  const { passthrough } = options.authOpts as AuthenticateOpts
+
+  if (! ctx.jwtState) {
+    ctx.jwtState = { } as JwtState
+  }
+  if (! ctx.state) {
+    ctx.state = { }
+  }
 
   try {
     const token = retrieveToken(ctx, options.authOpts)
@@ -51,13 +59,17 @@ async function authenticate(
     )
 
     const decoded = validateToken(ctx.app.jwt, token, secretSet, options)
-    ctx.state[key] = decoded
+    ctx.jwtState.user = decoded
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    ctx.state.user = decoded
   }
   catch (ex) {
     const pass = await parseByPassthrough(ctx, passthrough)
     if (pass === true) {
       // lets downstream middlewares handle JWT exceptions
       ctx.state.jwtOriginalError = ex
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ctx.state.jwtOriginalError = ex as Error
     }
     else if (typeof pass === 'string' && pass.length > 0) {
       ctx.redirect(pass)

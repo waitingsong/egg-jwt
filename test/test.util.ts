@@ -40,7 +40,7 @@ export function createNextCb(
         assert(msg && msg.includes(expectExceptionMsg as string))
       }
       else {
-        assert.deepStrictEqual(ctx.state && ctx.state.user, payload1)
+        assert.deepStrictEqual(ctx.jwtState && ctx.jwtState.user, payload1)
       }
 
       done()

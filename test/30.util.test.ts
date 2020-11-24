@@ -50,7 +50,8 @@ describe(filename, () => {
       const arr = [
         '', Buffer.alloc(0), {},
         true, false, null, void 0, Symbol('foo'),
-        () => { },
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        () => {},
       ]
 
       arr.forEach((val) => {
@@ -85,7 +86,8 @@ describe(filename, () => {
         { key: 123 },
         { passphrase: 123 },
         true, false, null, void 0, Symbol('foo'),
-        () => { },
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        () => {},
       ]
 
       arr.forEach((val) => {
@@ -117,6 +119,7 @@ describe(filename, () => {
       const arr = [
         '', Buffer.alloc(0), {},
         true, null, void 0, Symbol('foo'),
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => { },
       ]
 
