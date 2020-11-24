@@ -1,5 +1,5 @@
-import { JwtConfig } from '../lib/model'
 import { initialConfig } from '../lib/config'
+import { JwtConfig } from '../lib/model'
 
 
 /* istanbul ignore next */

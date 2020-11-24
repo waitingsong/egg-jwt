@@ -1,11 +1,11 @@
 import { basename } from '@waiting/shared-core'
 import * as assert from 'power-assert'
 
+import { schemePrefix } from '../src'
 import {
   resolveFromAuthorizationHeader,
   resolveFromCookies,
 } from '../src/lib/resolvers'
-import { schemePrefix } from '../src'
 
 import { token1 } from './test.config'
 

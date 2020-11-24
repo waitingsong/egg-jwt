@@ -69,6 +69,7 @@ describe(filename, () => {
         secret,
       }
       const jwt = new Jwt(opts)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       const { decode } = jwt
 
       try {

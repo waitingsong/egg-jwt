@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as jwt from 'jsonwebtoken'
 import { JsonType } from '@waiting/shared-types'
+import * as jwt from 'jsonwebtoken'
 
 import {
   JwtOptions,
@@ -41,6 +41,7 @@ export class Jwt {
     options?: SignOpts,
   ): JwtToken {
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (! this) { throw new TypeError('Should call with class name, such as jwt.foo()') }
 
     const opts: SignOpts = options
@@ -68,6 +69,7 @@ export class Jwt {
     options?: VerifyOpts,
   ): JwtDecodedPayload<T> {
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (! this) { throw new TypeError('Should call with class name, such as jwt.foo()') }
 
     const opts: VerifyOpts = options
@@ -96,6 +98,7 @@ export class Jwt {
     token: JwtToken,
   ): JwtComplete<T> {
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (! this) { throw new TypeError('Should call with class name, such as jwt.foo()') }
 
     let opts: DecodeOpts = { complete: true }

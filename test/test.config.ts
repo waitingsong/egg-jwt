@@ -1,4 +1,4 @@
-import { JsonType } from '@waiting/shared-types'
+import { JsonObject } from '@waiting/shared-types'
 
 
 export const secret = '123456abc'
@@ -10,7 +10,7 @@ export interface PayloadSig1 {
   [index: string]: string | number
 }
 /** Type extends from JsonType */
-export interface PayloadExt1 extends JsonType {
+export interface PayloadExt1 extends JsonObject {
   foo: string
   iat: number
 }

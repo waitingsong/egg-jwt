@@ -1,5 +1,5 @@
-import * as assert from 'power-assert'
 import { Context } from 'egg'
+import * as assert from 'power-assert'
 
 import { Jwt } from '../src'
 import { initialJwtOptions } from '../src/lib/config'
@@ -7,17 +7,18 @@ import { initialJwtOptions } from '../src/lib/config'
 import { payload1, testRedirectURL } from './test.config'
 
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function createContext(props?: object): Context {
   const ctx = {
     throw: (status: number, message: string) => {
       throw new Error(`${status}:${message}`)
     },
-    state: {},
+    jwtState: {},
     app: {
       jwt: new Jwt(initialJwtOptions),
     },
     ...props,
-  } as Context
+  } as unknown as Context
 
   ctx.redirect = (url: string) => {
     assert(url && url.includes(testRedirectURL))
@@ -33,9 +34,9 @@ export function createNextCb(
 
   return () => {
     return new Promise((done) => {
-      if (ctx.state.jwtOriginalError) {
-        assert(ctx.state.jwtOriginalError instanceof Error)
-        const msg: string = ctx.state.jwtOriginalError.message
+      if (ctx.jwtState && ctx.jwtState.jwtOriginalError) {
+        assert(ctx.jwtState.jwtOriginalError instanceof Error)
+        const msg: string = ctx.jwtState.jwtOriginalError.message
         assert(expectExceptionMsg, 'Should pass expectExceptionMsg')
         assert(msg && msg.includes(expectExceptionMsg as string))
       }

@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Context } from 'egg'
 
-import { JwtToken, AuthenticateOpts } from './model'
 import { schemePrefix } from './config'
+import { JwtToken, AuthenticateOpts } from './model'
 
 
 /**
@@ -20,7 +22,7 @@ export function retrieveToken(ctx: Context, options?: AuthenticateOpts): JwtToke
 
   /* istanbul ignore else */
   if (! token) {
-    let authorization: string = ctx.header && ctx.header.authorization
+    let authorization: string = ctx.header?.authorization
       ? ctx.header.authorization
       : ''
     if (authorization) {

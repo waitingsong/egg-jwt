@@ -5,7 +5,7 @@ import { bindJwtOnAppOrAgent, registerMiddleware } from './lib/bind'
 
 
 /* istanbul ignore next */
-export default (app: Application) => {
+export default (app: Application): void => {
   bindJwtOnAppOrAgent(app)
   registerMiddleware(app)
 }

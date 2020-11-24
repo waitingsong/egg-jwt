@@ -15,6 +15,7 @@ export function bindJwtOnAppOrAgent(app: Application | Agent): void {
 
 function createOneClient(options: JwtOptions, app: Application | Agent): Jwt {
   const opts: JwtOptions = parseOptions(options)
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   assert(opts && Object.keys(opts).length, `[egg-${pluginName}] config empty`)
 
   const client = new Jwt(opts)
@@ -23,16 +24,18 @@ function createOneClient(options: JwtOptions, app: Application | Agent): Jwt {
   return client
 }
 
-export function registerMiddleware(app: Application) {
+export function registerMiddleware(app: Application): void {
   const { config } = app
 
-  assert.equal(
+  assert.strictEqual(
     (config.appMiddleware as unknown[]).includes(middlewareName),
     false,
     `Duplication of middleware name found: ${middlewareName}. Rename your middleware other than "${middlewareName}".`,
   )
 
-  config.appMiddleware.unshift(middlewareName)
+  if (Array.isArray(config.appMiddleware)) {
+    config.appMiddleware.unshift(middlewareName)
+  }
 }
 
 

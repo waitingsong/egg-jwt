@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { basename } from '@waiting/shared-core'
-import * as assert from 'power-assert'
 import { Context } from 'egg'
+import * as assert from 'power-assert'
 
 import { JwtConfig, jwtMiddlewareFactorey, RedirectURL } from '../src'
 import { initialConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'

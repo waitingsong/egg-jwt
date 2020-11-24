@@ -2,13 +2,13 @@ import { basename } from '@waiting/shared-core'
 import * as assert from 'power-assert'
 
 
+import { schemePrefix } from '../src'
 import {
   validateTokenString,
   validatePayload,
   validateSignSecret,
   validateVerifySecret,
 } from '../src/lib/util'
-import { schemePrefix } from '../src'
 
 import { token1 } from './test.config'
 

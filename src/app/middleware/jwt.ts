@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Context } from 'egg'
 
+import { JwtMsg } from '../../lib/config'
+import { Jwt } from '../../lib/jwt'
 import {
   AuthenticateOpts,
   EggMiddleware,
@@ -14,8 +16,6 @@ import {
   JwtState,
 } from '../../lib/model'
 import { retrieveToken } from '../../lib/resolvers'
-import { JwtMsg } from '../../lib/config'
-import { Jwt } from '../../lib/jwt'
 import { parseOptions } from '../../lib/util'
 
 
@@ -55,7 +55,7 @@ async function authenticate(
     const secretSet: Set<VerifySecret> = genVerifySecretSet(
       options.secret,
       options.verifySecret,
-      ctx.state ? ctx.state.secret : void 0,
+      ctx.jwtState.secret,
     )
 
     const decoded = validateToken(ctx.app.jwt, token, secretSet, options)
@@ -63,11 +63,11 @@ async function authenticate(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     ctx.state.user = decoded
   }
-  catch (ex) {
+  catch (ex: unknown) {
     const pass = await parseByPassthrough(ctx, passthrough)
     if (pass === true) {
       // lets downstream middlewares handle JWT exceptions
-      ctx.state.jwtOriginalError = ex
+      ctx.jwtState.jwtOriginalError = ex as Error
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       ctx.state.jwtOriginalError = ex as Error
     }
@@ -76,7 +76,8 @@ async function authenticate(
       return
     }
     else {
-      const msg = debug === true ? ex.message : JwtMsg.AuthFailed
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const msg = debug === true ? (ex as Error).message : JwtMsg.AuthFailed
       ctx.throw(401, msg, { originalError: ex })
     }
   }
@@ -157,12 +158,12 @@ function validateToken(
       const ss = typeof secret === 'string' ? secret : secret.toString()
       const start = ss.slice(0, 2)
       const end = ss.length > 5 ? ss.slice(-2) : '**'
-      const msg = ex.message ? ex.message.toString() : ''
-      msgs.push(`${msg}: with secret "${start}****${end}"`)
+      msgs.push(`Error during verify: with secret "${start}****${end}"`)
     }
   })
 
   /* istanbul ignore else */
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (ret === null) {
     throw new Error(JwtMsg.TokenValidFailed + ':\n' + msgs.join('\n'))
   }

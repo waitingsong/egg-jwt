@@ -1,17 +1,17 @@
 import * as assert from 'assert'
 
 import {
-  JwtConfig,
-  JwtOptions,
-  JwtPayload,
-  JwtToken,
-} from './model'
-import {
   initialAuthOpts,
   initialConfig,
   initialJwtOptions,
   JwtMsg,
 } from './config'
+import {
+  JwtConfig,
+  JwtOptions,
+  JwtPayload,
+  JwtToken,
+} from './model'
 
 
 /** Generate jwtConfig with input and default value */
@@ -116,7 +116,7 @@ export function validateSignSecret(input: JwtOptions['secret']): void {
   else if (Buffer.isBuffer(input)) {
     assert(input.length > 0, JwtMsg.InvalidInputBuffer)
   }
-  else if (typeof input === 'object' && input) {
+  else if (typeof input === 'object') {
     assert(Object.keys(input).length > 0)
     assert(typeof input.key === 'string' && input.key.length > 0)
     assert(typeof input.passphrase === 'string')

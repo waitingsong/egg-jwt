@@ -1,3 +1,4 @@
+import { JsonObject, JsonType } from '@waiting/shared-types'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Context } from 'egg'
 import {
@@ -7,7 +8,6 @@ import {
   Secret as SignSecret,
   VerifyOptions,
 } from 'jsonwebtoken'
-import { JsonType } from '@waiting/shared-types'
 
 
 export {
@@ -65,8 +65,8 @@ export interface AuthenticateOpts {
    */
   cookie: string | false
   /**
-   * This lets downstream middleware make decisions based on whether ctx.state.user is set.
-   * You can still handle errors using ctx.state.jwtOriginalError.
+   * This lets downstream middleware make decisions based on whether ctx.jwtState.user is set.
+   * You can still handle errors using ctx.jwtState.jwtOriginalError.
    * Default: user
    */
   // key: 'user' | string
@@ -80,7 +80,7 @@ export interface AuthenticateOpts {
 }
 
 export type JwtToken = string
-export type JwtPayload = string | Buffer | object
+export type JwtPayload = string | Buffer | JsonObject
 export type JwtDecodedPayload<T extends string | JsonType = JsonType> = T
 export interface JwtComplete<T extends string | JsonType = JsonType> {
   header: JwtHeader
@@ -109,6 +109,9 @@ export interface JwtState {
 declare module 'egg' {
   interface Context {
     jwtState?: JwtState
+    // header?: {
+    //   authorization: string,
+    // }
   }
 }
 
