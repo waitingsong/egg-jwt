@@ -5,7 +5,7 @@ import { Agent, Application } from 'egg'
 
 import { pluginName, middlewareName } from './config'
 import { Jwt } from './jwt'
-import { JwtOptions } from './model'
+import { JwtConfig, JwtOptions } from './model'
 import { parseOptions } from './util'
 
 
@@ -40,7 +40,13 @@ declare module 'egg' {
   interface Application {
     jwt: Jwt
   }
+
   interface Agent {
     jwt: Jwt
   }
+
+  interface EggAppConfig {
+    jwt: JwtConfig
+  }
 }
+
