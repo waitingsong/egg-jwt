@@ -1,38 +1,38 @@
+dbconfig.json
 package-lock.json
 yarn.lock
-/agent.js
-/app.js
-app/**/*.js
-test/**/*.js
-config/**/*.js
-*.map
-*.swp
-*.bak
-*.[oa]
-*.md5
-*.d.ts
-Thumbs.db
-node_modules*
+package.json.lerna_backup
+
 .coveralls.yml
-install/
-target/
-build/
-run/
-diff-dump/
-.mvn
 .factorypath
-nbproject/
-/www
 .githooks
+.history
+.mvn
 .tsbuildinfo
 .tsbuildinfo.*
+build/
+diff-dump/
+install/
+log/
+node_modules*
+run/
+target/
+Thumbs.db
+
 *.__built-tables.ts
+*.__built-dict.ts
+*.bak
+*.d.ts
+*.map
+*.md5
+*.[oa]
 
-dbconfig.json
 
-!.vscode/settings.json.example
-!settings/*.example
-
+# for lerna mono repo
+# egg
+/packages/*/*.js
+/packages/*/config/
+/packages/*/lib/
 
 
 # for java
@@ -86,7 +86,9 @@ log.txt
 .tmp/
 .versions/
 www/
+bazel-out/
 dist/
+out-tsc/
 tmp/
 temp/
 hooks/
@@ -180,13 +182,6 @@ coverage
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
-
-# Dependency directories
-node_modules/
-jspm_packages/
-
-# Typescript v1 declaration files
-typings/
 
 # Optional npm cache directory
 .npm

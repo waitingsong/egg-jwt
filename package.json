@@ -1,85 +1,67 @@
 {
-  "name": "@waiting/egg-jwt",
+  "name": "npm-base",
   "author": "waiting",
-  "version": "3.0.1",
-  "description": "jwt plugin of egg for signing, verifying as plugin and authentication as middleware",
-  "eggPlugin": {
-    "name": "jwt"
-  },
+  "version": "0.0.1",
+  "description": "npm boilerplate",
   "keywords": [
-    "midway",
-    "egg",
-    "eggPlugin",
-    "egg-plugin",
-    "jwt",
-    "authorization",
-    "authentication",
-    "header",
-    "cookies",
+    "种子项目",
     "typescript",
     "ts"
   ],
   "bin": {},
   "browser": "",
   "es2015": "",
-  "main": "./index.cjs.js",
-  "module": "./index.js",
-  "types": "./index.d.ts",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "bugs": {
-    "url": "https://github.com/waitingsong/egg-jwt/issues"
+    "url": "https://github.com/waitingsong/npm-base/issues"
   },
-  "homepage": "https://waitingsong.github.io/egg-jwt",
+  "homepage": "https://github.com/waitingsong/npm-base#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waitingsong/egg-jwt.git"
+    "url": "git+https://github.com/waitingsong/npm-base.git"
   },
   "license": "MIT",
   "dependencies": {
-    "@waiting/shared-types": "^3.0.0",
-    "jsonwebtoken": "^8.5.1"
+    "rxjs": "^6.5.2"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^8.3.3",
-    "@types/mocha": "7",
-    "@types/node": "12",
+    "@commitlint/cli": "11",
+    "@commitlint/config-conventional": "11",
+    "@rollup/plugin-commonjs": "16",
+    "@rollup/plugin-node-resolve": "10",
+    "@types/mocha": "8",
+    "@types/node": "14",
     "@types/power-assert": "1",
     "@types/rewire": "2",
-    "@types/rimraf": "2",
-    "@types/yargs": "13",
-    "@waiting/eslint-config": "2",
-    "@waiting/shared-core": "^3.0.0",
+    "@types/rimraf": "3",
+    "@types/yargs": "15",
+    "@waiting/eslint-config": "5",
+    "@waiting/shared-core": "5",
     "coveralls": "3",
     "cross-env": "7",
-    "egg": "^2.23.0",
-    "eslint": "6",
+    "eslint": "7",
     "espower-typescript": "9",
     "intelli-espower-loader": "1",
-    "mocha": "7",
+    "mocha": "8",
     "mocha-lcov-reporter": "1",
     "nyc": "15",
     "power-assert": "1",
-    "rewire": "4",
+    "rewire": "5",
     "rimraf": "3",
-    "rollup": "1",
-    "rollup-plugin-commonjs": "10",
-    "rollup-plugin-node-resolve": "5",
-    "rollup-plugin-terser": "5",
+    "rollup": "2",
+    "rollup-plugin-terser": "7",
     "rxrunscript": "5",
-    "ts-node": "8",
-    "typescript": "3",
-    "yargs": "15"
+    "ts-node": "9",
+    "typescript": "4",
+    "yargs": "16"
   },
   "engines": {
-    "node": ">=10.16.0"
+    "node": ">=14.14.0"
   },
   "files": [
-    "agent.*",
-    "app",
-    "app.*",
-    "config",
-    "dist",
-    "index.*",
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -89,7 +71,9 @@
     "bp:sync": "git fetch --all -v && git merge bp/master -m \"Merge remote-tracking branch 'bp/master'\"",
     "build": "npm run lint && npm run tsc && npm run rp",
     "devbuild": "npm run clean && npm run tsc:dev && npm run rp",
-    "clean": "rm -rf dist/* .vscode/.tsbuildinfo .vscode/.tsbuildinfo.* ",
+    "clean": "rm -rf dist/* && npm run clean:lock && npm run clean:cache",
+    "clean:cache": "rm .eslintcache .vscode/.tsbuildinfo .vscode/.tsbuildinfo.* -f",
+    "clean:lock": "rm package-lock.json -f",
     "cov": "cross-env TS_NODE_PROJECT=test/tsconfig.json nyc mocha",
     "cov:coveralls": "cross-env TS_NODE_PROJECT=test/tsconfig.json nyc mocha && nyc report --reporter=text-lcov | coveralls",
     "doc": "typedoc src/index.ts src/lib/index.ts src/lib/model.ts",

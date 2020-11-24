@@ -82,11 +82,14 @@
   "typescript.preferences.quoteStyle": "single",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "[markdown]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
     "files.trimTrailingWhitespace": false
   },
   "[typescript]": {
-    "editor.formatOnSave": false,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false
   },
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "typescript.tsdk": "./node_modules/typescript/lib"
 }

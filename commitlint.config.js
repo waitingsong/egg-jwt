@@ -3,17 +3,12 @@ const config = {
   rules: {
     'body-leading-blank': [2, 'always'],
     'footer-leading-blank': [2, 'always'],
-    'header-max-length': [2, 'always', 72],
-    'scope-case': [2, 'always', 'lower-case'],
+    'header-max-length': [2, 'always', 100],
     'subject-case': [
       2,
       'never',
       ['start-case', 'pascal-case', 'upper-case'],
     ],
-    'subject-empty': [2, 'never'],
-    'subject-full-stop': [2, 'never', '.'],
-    'type-case': [2, 'always', 'lower-case'],
-    'type-empty': [2, 'never'],
     'type-enum': [
       2,
       'always',
@@ -24,6 +19,7 @@ const config = {
         'docs',
         'feat',
         'fix',
+        'improvement',
         'perf',
         'refactor',
         'revert',

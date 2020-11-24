@@ -1,6 +1,6 @@
 import { dirname } from 'path'
-import commonjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
 
@@ -47,7 +47,7 @@ const uglifyOpts = {
     typeofs:       false,
   },
   output: {
-    preamble: banner,
+    // preamble: banner,
   },
 }
 
@@ -74,25 +74,29 @@ if (peerDeps && Object.keys(peerDeps).length) {
 }
 external = [...new Set(external)]
 
+const config = []
 
-const config = [
-  // CommonJS (for Node) and ES module (for bundlers) build.
-  {
-    external: external.concat(nodeModule),
-    input: pkg.module,
-    output: [
-      {
-        file: pkg.main,
-        amd: { id: name },
-        banner,
-        format: 'cjs',
-        globals,
-        name,
-        sourcemap: true,
-      },
-    ],
-  },
-]
+if (pkg.main) {
+  config.push(
+    // CommonJS (for Node) and ES module (for bundlers) build.
+    {
+      external: external.concat(nodeModule),
+      input: pkg.module,
+      output: [
+        {
+          file: pkg.main,
+          amd: { id: name },
+          banner,
+          format: 'cjs',
+          globals,
+          name,
+          sourcemap: true,
+        },
+      ],
+    },
+  )
+}
+
 
 if (pkg.es2015) {
   config[0].output.push(
@@ -156,7 +160,9 @@ if (pkg.bin) {
     if (! binPath) {
       continue
     }
-    const binSrcPath = binPath.includes('dist/') ? binPath : `./dist/${binPath}`
+    const binSrcPath = binPath.includes('bin/') && ! binPath.includes('dist/bin/')
+      ? binPath.replace('bin/', 'dist/bin/')
+      : binPath
 
     config.push({
       external: external.concat(nodeModule),
