@@ -55,6 +55,7 @@ export const jwt: JwtConfig = {
     debug: false,
     secret: '123456abc',
   },
+  // match /signup* and /login*
   ignore: ['/signup', '/login'],
 }
 ```
@@ -85,7 +86,7 @@ export class UserService {
 
   @get('/')
   public index(ctx: Context): void {
-    ctx.body = `\nPayload: ${ctx.jwtState && ctx.jwtState.data.user ? JSON.stringify(ctx.jwtState.data.user) : 'Not found'}`
+    ctx.body = `\nPayload: ${ctx.jwtState && ctx.jwtState.user ? JSON.stringify(ctx.jwtState.user) : 'Not found'}`
   }
 
 }

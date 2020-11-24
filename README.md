@@ -56,6 +56,7 @@ export const jwt: JwtConfig = {
     debug: false,
     secret: '123456abc',
   },
+  // match /signup* and /login*
   ignore: ['/signup', '/login'],
 }
 ```
