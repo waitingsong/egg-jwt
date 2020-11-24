@@ -56,7 +56,7 @@ export const jwt: JwtConfig = {
     debug: false,
     secret: '123456abc',
   },
-  // match /signup* and /login*
+  // https://github.com/eggjs/egg-path-matching 
   ignore: ['/signup', '/login'],
 }
 ```
