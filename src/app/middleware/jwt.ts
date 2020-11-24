@@ -55,7 +55,8 @@ async function authenticate(
     const secretSet: Set<VerifySecret> = genVerifySecretSet(
       options.secret,
       options.verifySecret,
-      ctx.jwtState.secret,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ctx.jwtState.secret ?? ctx.state?.secret,
     )
 
     const decoded = validateToken(ctx.app.jwt, token, secretSet, options)
