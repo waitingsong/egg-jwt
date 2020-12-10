@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+
+### [4.0.1](https://github.com/waitingsong/egg-jwt/compare/v4.0.0...v4.0.1) (2020-11-30)
+
+
+## [4.0.0](https://github.com/waitingsong/egg-jwt/compare/v3.0.1...v4.0.0) (2020-11-24)
+
+
+### Features
+
+* add result both at ctx.state.user and ctx.jwtState.user ([0574229](https://github.com/waitingsong/egg-jwt/commit/0574229edd85827bf0cd4d7ee8649be676ef0ec4))
+* declare type of EggAppConfig['jwt'] is JwtConfig ([129d18f](https://github.com/waitingsong/egg-jwt/commit/129d18f2c263f158260fdf0d9a30755075e736d0))
+* use both ctx.jwtState.secret and ctx.state?.secret ([c85dd9c](https://github.com/waitingsong/egg-jwt/commit/c85dd9c03dca4b2d640d7939ada12035d4968c22))
+
+
+## [3.0.1](https://github.com/waitingsong/egg-jwt/compare/v3.0.0...v3.0.1) (2020-02-11)
+
+
+### Bug Fixes
+
+* retrieveToken() ([55eb4c4](https://github.com/waitingsong/egg-jwt/commit/55eb4c4a484f5b70e9dae81d847e8f688a24826d))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### [3.0.1](https://github.com/waitingsong/egg-jwt/compare/v3.0.0...v3.0.1) (2020-02-11)
 
 
