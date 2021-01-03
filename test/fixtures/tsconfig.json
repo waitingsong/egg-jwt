@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
     "inlineSourceMap": false,
@@ -7,14 +7,19 @@
     "noImplicitAny": false,
     "noImplicitThis": false,
     "noUnusedLocals": false,
-    "target": "ESNEXT"
+    "outDir": ".",
+    "rootDir": ".",
+    "target": "ESNEXT",
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": [
     "**/*.ts"
   ],
   "exclude": [
-    "asset/",
-    "fixtures/",
+    "asset",
+    "app/public",
+    "app/views",
+    "dist",
     "node_modules*",
     "**/*.d.ts",
     "**/*.spec.ts"

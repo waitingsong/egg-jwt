@@ -29,21 +29,11 @@ export function createContext(props?: object): Context {
 
 export function createNextCb(
   ctx: Context,
-  expectExceptionMsg?: string,
 ): () => Promise<void> {
 
   return () => {
     return new Promise((done) => {
-      if (ctx.jwtState && ctx.jwtState.jwtOriginalError) {
-        assert(ctx.jwtState.jwtOriginalError instanceof Error)
-        const msg: string = ctx.jwtState.jwtOriginalError.message
-        assert(expectExceptionMsg, 'Should pass expectExceptionMsg')
-        assert(msg && msg.includes(expectExceptionMsg as string))
-      }
-      else {
-        assert.deepStrictEqual(ctx.jwtState && ctx.jwtState.user, payload1)
-      }
-
+      assert(ctx)
       done()
     })
   }

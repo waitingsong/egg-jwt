@@ -5,68 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "index.ts",
+      "name": "Tests",
       "type": "node",
-      "args": [
-        "-P", "./tsconfig.cjs.json",
-        "src/index.ts"
-      ],
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/node_modules/ts-node/dist/bin.js",
-      "protocol": "inspector",
-      "request": "launch",
-      "runtimeArgs": [
-        "--nolazy"
-      ],
-      "skipFiles": [
-        "${workspaceFolder}/node_modules/rxjs/**/*.js",
-        "<node_internals>/**/*.js"
-      ],
-      "stopOnEntry": false
-    },
-    {
-      "name": "Current TS File",
-      "type": "node",
-      "args": [
-        "-P", "./tsconfig.cjs.json",
-        "${relativeFile}"
-      ],
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/node_modules/ts-node/dist/bin.js",
-      "protocol": "inspector",
-      "request": "launch",
-      "runtimeArgs": [
-        "--nolazy"
-      ],
-      "skipFiles": [
-        "${workspaceFolder}/node_modules/rxjs/**/*.js",
-        "<node_internals>/**/*.js"
-      ],
-      "stopOnEntry": false
-    },
-    {
-      "name": "Chrome Debug with Karma",
-      "type": "chrome",
-      "address": "localhost",
-      "pathMapping": {
-        "/": "${workspaceRoot}/",
-        "/base/": "${workspaceRoot}/"
-      },
-      "port": 9333,
-      "request": "attach"
-    },
-    {
-      "name": "Mocha Tests",
-      "type": "node",
-      "args": [
-        "-u",
-        "bdd",
-        "--timeout",
-        "999999",
-        "--colors",
-        "--parallel=false",
-        // "${workspaceFolder}/test/**/**.test.ts"
-      ],
+      "autoAttachChildProcesses": true,
+      "console": "integratedTerminal",
       "env": {
         "NODE_ENV": "local",
         "TS_NODE_PROJECT": "test/tsconfig.json",
@@ -75,13 +17,21 @@
         "PGPASSWORD": "",
       },
       "internalConsoleOptions": "openOnSessionStart",
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      // "preLaunchTask": "TypeScript compile",
       "request": "launch",
+      "runtimeArgs": [
+        "run",
+        "test",
+        "--",
+        "--inspect-brk"
+      ],
+      "runtimeExecutable": "npm",
       "skipFiles": [
         "${workspaceFolder}/../../node_modules/rxjs/**/*.js",
         "${workspaceFolder}/node_modules/rxjs/**/*.js",
         "<node_internals>/**/*.js"
-      ]
+      ],
+      "timeout": 120000
     },
   ]
 }

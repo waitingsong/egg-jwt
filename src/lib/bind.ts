@@ -5,7 +5,7 @@ import { Agent, Application } from 'egg'
 
 import { pluginName, middlewareName } from './config'
 import { Jwt } from './jwt'
-import { JwtConfig, JwtOptions } from './model'
+import { JwtOptions } from './model'
 import { parseOptions } from './util'
 
 
@@ -26,30 +26,22 @@ function createOneClient(options: JwtOptions, app: Application | Agent): Jwt {
 
 export function registerMiddleware(app: Application): void {
   const { config } = app
+  const { appMiddlewareIndex } = config.jwt
 
+  assert(typeof appMiddlewareIndex === 'number')
   assert.strictEqual(
     (config.appMiddleware as unknown[]).includes(middlewareName),
     false,
     `Duplication of middleware name found: ${middlewareName}. Rename your middleware other than "${middlewareName}".`,
   )
 
-  if (Array.isArray(config.appMiddleware)) {
-    config.appMiddleware.unshift(middlewareName)
+  assert(Array.isArray(config.appMiddleware))
+  if (appMiddlewareIndex >= 0) {
+    config.appMiddleware.splice(appMiddlewareIndex, 0, middlewareName)
   }
-}
-
-
-declare module 'egg' {
-  interface Application {
-    jwt: Jwt
+  else {
+    config.appMiddleware.push(middlewareName)
   }
 
-  interface Agent {
-    jwt: Jwt
-  }
-
-  interface EggAppConfig {
-    jwt: JwtConfig
-  }
 }
 

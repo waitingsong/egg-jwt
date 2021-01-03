@@ -3,11 +3,18 @@ import { Agent } from 'egg'
 
 import { bindJwtOnAppOrAgent } from './lib/bind'
 import { JwtConfig } from './lib/model'
+import { parseConfig } from './lib/util'
 
 
 /* istanbul ignore next */
 export default (agent: Agent): void => {
-  const jwtConfig: JwtConfig = agent.config.jwt
+  const config: JwtConfig = parseConfig(agent.config.jwt)
 
-  jwtConfig.agent && bindJwtOnAppOrAgent(agent)
+  if (config.agent) {
+    agent.config.jwt = {
+      ...config,
+    }
+    bindJwtOnAppOrAgent(agent)
+  }
 }
+
