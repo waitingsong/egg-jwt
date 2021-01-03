@@ -86,7 +86,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "bp:add": "git remote add bp https://github.com/waitingsong/npm-base",
+    "bp:add": "git remote add bp https://github.com/waitingsong/egg-plugin-base",
     "bp:sync": "git fetch --all -v && git merge bp/master -m \"Merge remote-tracking branch 'bp/master'\"",
     "build": "npm run lint && npm run tsc && npm run rp",
     "devbuild": "npm run clean && npm run tsc:dev && npm run rp",
