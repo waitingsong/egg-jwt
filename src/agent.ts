@@ -11,9 +11,9 @@ export default (agent: Agent): void => {
   const config: JwtConfig = parseConfig(agent.config.jwt)
 
   if (config.agent) {
-    agent.config.jwt = {
-      ...config,
-    }
+    // agent.config.jwt = {
+    //   ...config,
+    // }
     bindJwtOnAppOrAgent(agent)
   }
 }

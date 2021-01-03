@@ -8,9 +8,9 @@ export const keys = '123456'
 export const jwt: JwtConfig = {
   enable: true,
   client: {
-    secret: '123456',
+    secret: '123456', // 默认密钥，生产环境一定要更改
   },
   // rule https://github.com/eggjs/egg-path-matching
-  ignore: ['/ping', '/swagger-u*'],
+  ignore: ['/', '/ping', '/swagger-u*'],
 }
 

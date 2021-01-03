@@ -7,7 +7,7 @@ import * as assert from 'power-assert'
 import * as request from 'supertest'
 
 import { JwtMsg, JwtConfig } from '../../../src/index'
-import { jwt as jwtConfig } from '../../fixtures/test-1/config/config.default'
+import { jwt as jwtConfig } from '../../fixtures/test-3/config/config.default'
 
 
 const filename = basename(__filename)
@@ -19,7 +19,7 @@ describe(filename, () => {
   before(() => {
     // @ts-expect-error
     app = mm.app({
-      baseDir: 'test-1',
+      baseDir: 'test-3',
     })
     return app.ready()
   })
@@ -34,21 +34,17 @@ describe(filename, () => {
   it('should config correct', () => {
     assert(app.config && app.config.jwt)
     const config = app.config.jwt as JwtConfig
-    assert(! config.agent === ! jwtConfig.agent)
-    assert(! config.enable === ! jwtConfig.enable)
+    assert(config.agent === !! jwtConfig.agent)
+    assert(config.enable === !! jwtConfig.enable)
   })
 
-  it('should get a ctx', () => {
-    const ctx = app.mockContext()
-    assert(ctx.method === 'GET')
-    assert(ctx.url === '/')
-  })
-
-
-  it('should GET / ', async () => {
+  it('should GET / with error', async () => {
     const resp = await app.httpRequest()
       .get('/')
-      .expect(401)
+      .expect(200)
+      .expect('hi, jwt')
+
+    assert(resp)
   })
 
 

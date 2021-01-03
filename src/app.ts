@@ -11,9 +11,9 @@ export default (app: Application): void => {
   const config: JwtConfig = parseConfig(app.config.jwt)
 
   if (config.appWork) {
-    app.config.jwt = {
-      ...config,
-    }
+    // app.config.jwt = {
+    //   ...config,
+    // }
     bindJwtOnAppOrAgent(app)
     registerMiddleware(app)
   }

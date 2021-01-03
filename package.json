@@ -1,8 +1,8 @@
 {
-  "name": "egg-plugin-base",
+  "name": "@waiting/egg-jwt",
   "author": "waiting",
-  "version": "0.0.1",
-  "description": "npm egg plugin boilerplate",
+  "version": "4.0.1",
+  "description": "jwt plugin of egg for signing, verifying as plugin and authentication as middleware",
   "eggPlugin": {
     "name": "jwt"
   },
@@ -11,6 +11,11 @@
     "egg",
     "eggPlugin",
     "egg-plugin",
+    "jwt",
+    "authorization",
+    "authentication",
+    "header",
+    "cookies",
     "typescript",
     "ts"
   ],
@@ -19,22 +24,24 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "url": "https://github.com/waitingsong/egg-plugin-base/issues"
+    "url": "https://github.com/waitingsong/egg-jwt/issues"
   },
-  "homepage": "https://github.com/waitingsong/egg-plugin-base#readme",
+  "homepage": "https://waitingsong.github.io/egg-jwt",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waitingsong/egg-plugin-base.git"
+    "url": "git+https://github.com/waitingsong/egg-jwt.git"
   },
   "license": "MIT",
   "dependencies": {
-    "@waiting/shared-types": "^5.5.0"
+    "@waiting/shared-types": "^5.0.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@commitlint/cli": "11",
     "@commitlint/config-conventional": "11",
     "@rollup/plugin-commonjs": "17",
     "@rollup/plugin-node-resolve": "11",
+    "@types/jsonwebtoken": "^8.3.3",
     "@types/mocha": "8",
     "@types/node": "14",
     "@types/power-assert": "1",

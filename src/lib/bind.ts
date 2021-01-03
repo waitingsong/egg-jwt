@@ -42,6 +42,5 @@ export function registerMiddleware(app: Application): void {
   else {
     config.appMiddleware.push(middlewareName)
   }
-
 }
 
