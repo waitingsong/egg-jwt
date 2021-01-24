@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as assert from 'assert'
+import assert from 'assert'
 
 import { Context } from 'egg'
 

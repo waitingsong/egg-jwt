@@ -95,7 +95,7 @@
     "ci": "npm run cov",
     "cov": "npm run build:fixtures && cross-env TS_NODE_PROJECT=test/tsconfig.json egg-bin cov test/**/*.test.ts",
     "cov:coveralls": "npm run cov && nyc report --reporter=text-lcov | coveralls",
-    "doc": "typedoc src/index.ts src/lib/index.ts src/lib/model.ts",
+    "doc": "typedoc src/index.ts src/lib/index.ts src/lib/types.ts",
     "link_global": "npm link typescript",
     "lint": "eslint --fix --cache {src,test}/**/*.ts",
     "lint:nofix": "eslint --cache {src,test}/**/*.ts",

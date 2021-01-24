@@ -1,4 +1,4 @@
-import { initialConfig } from '../lib/config'
+import { initialEggConfig } from '../lib/config'
 import { JwtEggConfig } from '../lib/types'
 
 
@@ -8,5 +8,5 @@ import { JwtEggConfig } from '../lib/types'
  * @member Config#jwt
  */
 export const jwt: JwtEggConfig = {
-  ...initialConfig,
+  ...initialEggConfig,
 }

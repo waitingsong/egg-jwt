@@ -8,7 +8,7 @@ export const initialJwtOptions: Readonly<JwtOptions> = {
   debug: false,
 }
 
-export const initialConfig: Readonly<JwtEggConfig> = {
+export const initialEggConfig: Readonly<JwtEggConfig> = {
   appMiddlewareIndex: -1,
   appWork: true,
   agent: false,

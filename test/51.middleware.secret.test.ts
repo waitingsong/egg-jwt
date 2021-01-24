@@ -1,7 +1,7 @@
 import { basename } from '@waiting/shared-core'
 
 import { JwtEggConfig, jwtMiddlewareFactorey } from '../src'
-import { initialConfig, schemePrefix } from '../src/lib/config'
+import { initialEggConfig, schemePrefix } from '../src/lib/config'
 import { parseConfig } from '../src/lib/util'
 
 import { token1 } from './test.config'
@@ -24,7 +24,7 @@ describe(filename, () => {
       }
       const ctx = createContext(props)
       const next = createNextCb(ctx)
-      const config: JwtEggConfig = parseConfig(initialConfig)
+      const config: JwtEggConfig = parseConfig(initialEggConfig)
       const mw = jwtMiddlewareFactorey(config)
 
       assert(config.client.debug !== true)

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as assert from 'assert'
+import assert from 'assert'
 
 import { JwtOptions } from './types'
 import { parseOptions } from './util'
