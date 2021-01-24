@@ -1,11 +1,10 @@
 import type { Jwt } from './jwt'
-import { JwtConfig, JwtState } from './model'
+import { JwtEggConfig, JwtState } from './types'
 
 
 export * from './config'
 export * from './jwt'
-export * from './model'
-export * from './resolvers'
+export * from './types'
 export * from './util'
 
 declare module 'egg' {
@@ -22,7 +21,7 @@ declare module 'egg' {
   }
 
   interface EggAppConfig {
-    jwt: JwtConfig
+    jwt: JwtEggConfig
   }
 }
 

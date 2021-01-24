@@ -1,10 +1,12 @@
 import { Context } from 'egg'
-import * as assert from 'power-assert'
 
 import { Jwt } from '../src'
 import { initialJwtOptions } from '../src/lib/config'
 
 import { payload1, testRedirectURL } from './test.config'
+
+// eslint-disable-next-line import/order
+import assert = require('power-assert')
 
 
 // eslint-disable-next-line @typescript-eslint/ban-types

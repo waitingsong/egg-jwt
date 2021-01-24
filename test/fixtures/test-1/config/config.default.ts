@@ -1,11 +1,10 @@
 // eslint-disable-next-line node/no-unpublished-import
-import { JwtConfig } from '../../../../dist/index'
+import { JwtEggConfig } from '../../../../dist/index'
 
 
 export const keys = '123456'
 
-// jwt配置
-export const jwt: JwtConfig = {
+export const jwt: JwtEggConfig = {
   enable: true,
   client: {
     secret: '123456',

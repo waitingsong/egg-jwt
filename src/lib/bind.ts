@@ -1,11 +1,11 @@
-import * as assert from 'assert'
+import assert from 'assert'
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Agent, Application } from 'egg'
 
 import { pluginName, middlewareName } from './config'
 import { Jwt } from './jwt'
-import { JwtOptions } from './model'
+import { JwtOptions } from './types'
 import { parseOptions } from './util'
 
 
