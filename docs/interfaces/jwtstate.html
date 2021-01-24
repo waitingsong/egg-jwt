@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AuthenticateOpts | @waiting/egg-jwt</title>
+	<title>JwtState | @waiting/egg-jwt</title>
 	<meta name="description" content="Documentation for @waiting/egg-jwt">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="authenticateopts.html">AuthenticateOpts</a>
+					<a href="jwtstate.html">JwtState</a>
 				</li>
 			</ul>
-			<h1>Interface AuthenticateOpts</h1>
+			<h1>Interface JwtState</h1>
 		</div>
 	</div>
 </header>
@@ -65,7 +65,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Authentication options for middleware</p>
+						<p>Bind on egg.Context.jwtState</p>
 					</div>
 				</div>
 			</section>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AuthenticateOpts</span>
+						<span class="target">JwtState</span>
 					</li>
 				</ul>
 			</section>
@@ -84,8 +84,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="authenticateopts.html#cookie" class="tsd-kind-icon">cookie</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="authenticateopts.html#passthrough" class="tsd-kind-icon">passthrough</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="jwtstate.html#jwtoriginalerror" class="tsd-kind-icon">jwt<wbr>Original<wbr>Error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="jwtstate.html#secret" class="tsd-kind-icon">secret</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="jwtstate.html#user" class="tsd-kind-icon">user</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,38 +95,37 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="cookie" class="tsd-anchor"></a>
-					<h3>cookie</h3>
-					<div class="tsd-signature tsd-kind-icon">cookie<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span></div>
+					<a name="jwtoriginalerror" class="tsd-anchor"></a>
+					<h3>jwt<wbr>Original<wbr>Error</h3>
+					<div class="tsd-signature tsd-kind-icon">jwt<wbr>Original<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Error</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/waitingsong/egg-jwt/blob/master/src/lib/types.ts#L74">lib/types.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/waitingsong/egg-jwt/blob/master/src/lib/types.ts#L111">lib/types.ts:111</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Retrieving the token from the name of cookie, instead of from HTTP header (Authorization),
-							Default: false</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="passthrough" class="tsd-anchor"></a>
-					<h3>passthrough</h3>
-					<div class="tsd-signature tsd-kind-icon">passthrough<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><a href="../globals.html#redirecturl" class="tsd-signature-type">RedirectURL</a><span class="tsd-signature-symbol"> | </span><a href="../globals.html#passthroughcallback" class="tsd-signature-type">passthroughCallback</a></div>
+					<a name="secret" class="tsd-anchor"></a>
+					<h3>secret</h3>
+					<div class="tsd-signature tsd-kind-icon">secret<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/waitingsong/egg-jwt/blob/master/src/lib/types.ts#L87">lib/types.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/waitingsong/egg-jwt/blob/master/src/lib/types.ts#L112">lib/types.ts:112</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="user" class="tsd-anchor"></a>
+					<h3>user</h3>
+					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JsonType</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/waitingsong/egg-jwt/blob/master/src/lib/types.ts#L114">lib/types.ts:114</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<ul>
-								<li>false (Default): throw error</li>
-								<li>true: always yield next, even if no valid Authorization header was found,
-								and ignore value of JwtOptions.debug</li>
-								<li><RedirectURL>: redirect and without yield next</li>
-							</ul>
+							<p>Result</p>
 						</div>
 					</div>
 				</section>
@@ -141,21 +141,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="authenticateopts.html" class="tsd-kind-icon">Authenticate<wbr>Opts</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="authenticateopts.html#cookie" class="tsd-kind-icon">cookie</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="authenticateopts.html#passthrough" class="tsd-kind-icon">passthrough</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="jwtcomplete.html" class="tsd-kind-icon">Jwt<wbr>Complete</a>
 					</li>
@@ -165,9 +153,24 @@
 					<li class=" tsd-kind-interface">
 						<a href="jwtoptions.html" class="tsd-kind-icon">Jwt<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="jwtstate.html" class="tsd-kind-icon">Jwt<wbr>State</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="jwtstate.html#jwtoriginalerror" class="tsd-kind-icon">jwt<wbr>Original<wbr>Error</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="jwtstate.html#secret" class="tsd-kind-icon">secret</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="jwtstate.html#user" class="tsd-kind-icon">user</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#eggmiddleware" class="tsd-kind-icon">Egg<wbr>Middleware</a>
 					</li>
