@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { basename } from '@waiting/shared-core'
-import * as assert from 'power-assert'
 
-import { JwtConfig, jwtMiddlewareFactorey } from '../src'
-import { initialConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'
+import { JwtEggConfig, jwtMiddlewareFactorey } from '../src'
+import { initialEggConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'
 import { parseConfig } from '../src/lib/util'
 
 import { token1 } from './test.config'
 import { createContext, createNextCb } from './test.util'
+
+// eslint-disable-next-line import/order
+import assert = require('power-assert')
 
 
 const filename = basename(__filename)
@@ -19,7 +21,7 @@ describe(filename, () => {
     it('w/o token', async () => {
       const ctx = createContext()
       const next = createNextCb(ctx)
-      const config: JwtConfig = parseConfig(initialConfig)
+      const config: JwtEggConfig = parseConfig(initialEggConfig)
       const mw = jwtMiddlewareFactorey(config)
 
       try {
@@ -34,7 +36,7 @@ describe(filename, () => {
     it('w/o token debug', async () => {
       const ctx = createContext()
       const next = createNextCb(ctx)
-      const config: JwtConfig = parseConfig(initialConfig)
+      const config: JwtEggConfig = parseConfig(initialEggConfig)
       config.client.debug = true
       const mw = jwtMiddlewareFactorey(config)
 
@@ -50,7 +52,7 @@ describe(filename, () => {
     it('w/o token again', async () => {
       const ctx = createContext()
       const next = createNextCb(ctx)
-      const config: JwtConfig = parseConfig(initialConfig)
+      const config: JwtEggConfig = parseConfig(initialEggConfig)
       const mw = jwtMiddlewareFactorey(config)
 
       assert(config.client.debug !== true)
@@ -73,7 +75,7 @@ describe(filename, () => {
       }
       const ctx = createContext(props)
       const next = createNextCb(ctx)
-      const config: JwtConfig = parseConfig(initialConfig)
+      const config: JwtEggConfig = parseConfig(initialEggConfig)
       const mw = jwtMiddlewareFactorey(config)
 
       assert(config.client.debug !== true)
@@ -95,7 +97,7 @@ describe(filename, () => {
       }
       const ctx = createContext(props)
       const next = createNextCb(ctx)
-      const config: JwtConfig = parseConfig(initialConfig)
+      const config: JwtEggConfig = parseConfig(initialEggConfig)
       config.client.debug = true
       const mw = jwtMiddlewareFactorey(config)
 

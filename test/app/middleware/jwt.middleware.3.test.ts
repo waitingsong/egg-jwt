@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { basename } from '@waiting/shared-core'
-import { Context } from 'egg'
 import * as mm from 'egg-mock'
-import * as assert from 'power-assert'
 import * as request from 'supertest'
 
-import { JwtMsg, JwtConfig } from '../../../src/index'
+import { JwtMsg, JwtEggConfig } from '../../../src/index'
 import { jwt as jwtConfig } from '../../fixtures/test-3/config/config.default'
+
+// eslint-disable-next-line import/order
+import assert = require('power-assert')
 
 
 const filename = basename(__filename)
@@ -33,7 +34,7 @@ describe(filename, () => {
 
   it('should config correct', () => {
     assert(app.config && app.config.jwt)
-    const config = app.config.jwt as JwtConfig
+    const config = app.config.jwt as JwtEggConfig
     assert(config.agent === !! jwtConfig.agent)
     assert(config.enable === !! jwtConfig.enable)
   })

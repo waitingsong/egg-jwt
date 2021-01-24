@@ -1,6 +1,4 @@
 import { basename } from '@waiting/shared-core'
-import * as assert from 'power-assert'
-
 
 import { schemePrefix } from '../src'
 import {
@@ -11,6 +9,9 @@ import {
 } from '../src/lib/util'
 
 import { token1 } from './test.config'
+
+// eslint-disable-next-line import/order
+import assert = require('power-assert')
 
 
 const filename = basename(__filename)

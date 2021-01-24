@@ -5,6 +5,7 @@ import { JwtEggConfig, JwtState } from './types'
 export * from './config'
 export * from './jwt'
 export * from './types'
+export * from './resolvers'
 export * from './util'
 
 declare module 'egg' {

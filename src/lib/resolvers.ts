@@ -4,7 +4,7 @@
 import { Context } from 'egg'
 
 import { schemePrefix } from './config'
-import { JwtToken, AuthenticateOpts } from './model'
+import { JwtToken, AuthenticateOpts } from './types'
 
 
 /**
