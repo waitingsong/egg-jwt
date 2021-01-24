@@ -3,7 +3,7 @@ import { JsonType } from '@waiting/shared-types'
 import { Context } from 'egg'
 
 
-export interface JwtConfig {
+export interface JwtEggConfig {
   /**
    * The position of config.appMiddleware[] to add.
    * Default: -1 (last)

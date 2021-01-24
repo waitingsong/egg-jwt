@@ -1,5 +1,5 @@
 import { initialConfig } from '../lib/config'
-import { JwtConfig } from '../lib/model'
+import { JwtEggConfig } from '../lib/types'
 
 
 /* istanbul ignore next */
@@ -7,6 +7,6 @@ import { JwtConfig } from '../lib/model'
  * egg-jwt default config
  * @member Config#jwt
  */
-export const jwt: JwtConfig = {
+export const jwt: JwtEggConfig = {
   ...initialConfig,
 }

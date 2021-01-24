@@ -5,18 +5,18 @@ import {
   initialJwtOptions,
 } from './config'
 import {
-  JwtConfig,
+  JwtEggConfig,
   JwtOptions,
-} from './model'
+} from './types'
 
 
 /** Generate jwtConfig with input and default value */
-export function parseConfig(input: JwtConfig): JwtConfig {
+export function parseConfig(input: JwtEggConfig): JwtEggConfig {
   const config = {
     agent: initialConfig.agent,
     client: parseOptions(input.client),
     enable: initialConfig.enable,
-  } as JwtConfig
+  } as JwtEggConfig
 
   /* istanbul ignore else */
   if (typeof input.agent === 'boolean') {

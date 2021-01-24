@@ -41,7 +41,7 @@
     "@types/rewire": "2",
     "@types/rimraf": "3",
     "@types/yargs": "15",
-    "@waiting/eslint-config": "5",
+    "@waiting/eslint-config": "6",
     "@waiting/shared-core": "5",
     "autod": "^3.0.0",
     "autod-egg": "^1.0.0",
@@ -107,7 +107,7 @@
     "repo:init": "sh .githooks/init-repo.sh",
     "rp": "rollup -c rollup.config.js",
     "rp:w": "npm run tsc:w | rollup -wc rollup.config.js",
-    "test": "npm run build && npm run test:local",
+    "test": "npm run test:local",
     "test:local": "npm run build:fixtures && cross-env TS_NODE_PROJECT=test/tsconfig.json egg-bin test test/**/*.test.ts",
     "tsc": "tsc -p tsconfig.json",
     "tsc:w": "tsc -p tsconfig.json -w"
@@ -139,4 +139,3 @@
     "all": true
   }
 }
-

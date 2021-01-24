@@ -1,5 +1,4 @@
 import { basename } from '@waiting/shared-core'
-import * as assert from 'power-assert'
 
 import { Jwt, initialJwtOptions, JwtOptions } from '../src/index'
 
@@ -11,6 +10,9 @@ import {
   PayloadSig1,
   PayloadExt1,
 } from './test.config'
+
+// eslint-disable-next-line import/order
+import assert = require('power-assert')
 
 
 const filename = basename(__filename)

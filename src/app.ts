@@ -2,13 +2,13 @@
 import { Application } from 'egg'
 
 import { bindJwtOnAppOrAgent, registerMiddleware } from './lib/bind'
-import { JwtConfig } from './lib/model'
+import { JwtEggConfig } from './lib/types'
 import { parseConfig } from './lib/util'
 
 
 /* istanbul ignore next */
 export default (app: Application): void => {
-  const config: JwtConfig = parseConfig(app.config.jwt)
+  const config: JwtEggConfig = parseConfig(app.config.jwt)
 
   if (config.appWork) {
     app.config.jwt = {

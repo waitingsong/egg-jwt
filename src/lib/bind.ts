@@ -5,7 +5,7 @@ import { Agent, Application } from 'egg'
 
 import { pluginName, middlewareName } from './config'
 import { Jwt } from './jwt'
-import { JwtOptions } from './model'
+import { JwtOptions } from './types'
 import { parseOptions } from './util'
 
 

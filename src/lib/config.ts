@@ -1,4 +1,4 @@
-import { JwtConfig, JwtOptions } from './model'
+import { JwtEggConfig, JwtOptions } from './types'
 
 
 export const pluginName = 'jwt'
@@ -8,7 +8,7 @@ export const initialJwtOptions: Readonly<JwtOptions> = {
   debug: false,
 }
 
-export const initialConfig: Readonly<JwtConfig> = {
+export const initialConfig: Readonly<JwtEggConfig> = {
   appMiddlewareIndex: -1,
   appWork: true,
   agent: false,
