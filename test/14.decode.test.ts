@@ -1,6 +1,6 @@
 import { basename } from '@waiting/shared-core'
 
-import { Jwt, initialJwtOptions, JwtOptions } from '../src/index'
+import { Jwt, initialClientOptions, ClientOptions } from '../src/index'
 
 import {
   secret,
@@ -21,8 +21,8 @@ describe(filename, () => {
 
   describe('Should Jwt:foo() works', () => {
     it('normal string', () => {
-      const opts: JwtOptions = {
-        ...initialJwtOptions,
+      const opts: ClientOptions = {
+        ...initialClientOptions,
       }
       const jwt = new Jwt(opts)
       const input = 'fooabc' + Math.random().toString()

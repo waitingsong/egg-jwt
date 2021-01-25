@@ -5,7 +5,7 @@ import { Agent, Application } from 'egg'
 
 import { pluginName, middlewareName } from './config'
 import { Jwt } from './jwt'
-import { JwtOptions } from './types'
+import { ClientOptions } from './types'
 import { parseOptions } from './util'
 
 
@@ -13,8 +13,8 @@ export function bindJwtOnAppOrAgent(app: Application | Agent): void {
   app.addSingleton(pluginName, createOneClient)
 }
 
-function createOneClient(options: JwtOptions, app: Application | Agent): Jwt {
-  const opts: JwtOptions = parseOptions(options)
+function createOneClient(options: ClientOptions, app: Application | Agent): Jwt {
+  const opts: ClientOptions = parseOptions(options)
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   assert(opts && Object.keys(opts).length, `[egg-${pluginName}] config empty`)
 

@@ -17,24 +17,27 @@ export interface JwtEggConfig {
    * Switch for agent, Default: false.
    */
   agent?: boolean
-  client: JwtOptions
-  /** Switch of middleware works for egg.js, Default: false */
+  client: ClientOptions
+  /**
+   * Switch middleware works for egg.js, if afforded.
+   * Default: false
+   */
   enable: boolean
   /**
-   * match and ignore are exclusive exists
+   * Match and ignore are exclusive exists, for egg.js.
    * Default: undefined for matching all routings
    * Caution: '/' will match all, /^\/$/ matches only root !
    * @see https://github.com/eggjs/egg-path-matching
    */
   match?: MiddlewarePathPattern
   /**
-   * match and ignore are exclusive exists
+   * Match and ignore are exclusive exists, for egg.js.
    * Caution: '/' will match all, /^\/$/ matches only root !
    */
   ignore?: MiddlewarePathPattern
 }
 
-export interface JwtOptions {
+export interface ClientOptions {
   debug?: boolean
 }
 

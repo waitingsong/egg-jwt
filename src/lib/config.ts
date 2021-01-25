@@ -1,10 +1,10 @@
-import { JwtEggConfig, JwtOptions } from './types'
+import { JwtEggConfig, ClientOptions } from './types'
 
 
 export const pluginName = 'jwt'
 export const middlewareName = 'jwt'
 
-export const initialJwtOptions: Readonly<JwtOptions> = {
+export const initialClientOptions: Readonly<ClientOptions> = {
   debug: false,
 }
 

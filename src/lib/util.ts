@@ -2,11 +2,11 @@ import assert from 'assert'
 
 import {
   initialEggConfig,
-  initialJwtOptions,
+  initialClientOptions,
 } from './config'
 import {
   JwtEggConfig,
-  JwtOptions,
+  ClientOptions,
 } from './types'
 
 
@@ -50,14 +50,14 @@ export function parseConfig(input: JwtEggConfig): JwtEggConfig {
 }
 
 /** Generate jwtOptions with input and default value */
-export function parseOptions(client?: JwtOptions): JwtOptions {
-  const opts = {} as JwtOptions
+export function parseOptions(client?: ClientOptions): ClientOptions {
+  const opts = {} as ClientOptions
 
   if (client) {
     opts.debug = !! client.debug
   }
   else {
-    opts.debug = initialJwtOptions.debug
+    opts.debug = initialClientOptions.debug
   }
 
   assert(opts)

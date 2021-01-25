@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import assert from 'assert'
 
-import { JwtOptions } from './types'
+import { ClientOptions } from './types'
 import { parseOptions } from './util'
 
 
 export class Jwt {
 
-  private readonly config: JwtOptions
+  private readonly config: ClientOptions
 
-  constructor(config: JwtOptions) {
+  constructor(config: ClientOptions) {
     this.config = parseOptions(config)
   }
 

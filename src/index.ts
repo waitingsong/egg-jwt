@@ -1,4 +1,6 @@
-import jwtMiddlewareFactorey from './app/middleware/jwt'
+/* istanbul ignore file */
+
+import jwtMiddlewareFactorey from './app/middleware/index.middleware'
 
 
 export * from './lib/index'

@@ -7,7 +7,7 @@ import { JwtMsg } from '../../lib/config'
 import {
   EggMiddleware,
   JwtEggConfig,
-  JwtOptions,
+  ClientOptions,
 } from '../../lib/types'
 import { parseOptions } from '../../lib/util'
 
@@ -16,18 +16,18 @@ export default middlewareFactory
 
 function middlewareFactory(config: JwtEggConfig): EggMiddleware {
   const opts = parseOptions(config.client) // defined out of mw()!
-  const jwtmw = (
+  const mw = (
     ctx: Context,
     next: () => Promise<void>,
   ) => foo(ctx, next, opts)
 
-  return jwtmw
+  return mw
 }
 
 async function foo(
   ctx: Context,
   next: () => Promise<void>,
-  options: JwtOptions,
+  options: ClientOptions,
 ): Promise<void> {
 
   assert(ctx)
