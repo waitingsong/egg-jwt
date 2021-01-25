@@ -1,4 +1,4 @@
-import { AuthenticateOpts, JwtEggConfig, JwtOptions } from './types'
+import { AuthenticateOpts, JwtEggConfig, ClientOptions } from './types'
 
 
 export const pluginName = 'jwt'
@@ -8,7 +8,7 @@ export const initialAuthOpts: Readonly<AuthenticateOpts> = {
   cookie: false,
   passthrough: false,
 }
-export const initialJwtOptions: Readonly<JwtOptions> = {
+export const initialClientOptions: Readonly<ClientOptions> = {
   // authOpts: { ...initialAuthOpts },
   debug: false,
   secret: '',

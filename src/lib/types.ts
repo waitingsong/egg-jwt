@@ -32,7 +32,7 @@ export interface JwtEggConfig {
    * Switch for agent, Default: false.
    */
   agent?: boolean
-  client: JwtOptions
+  client: ClientOptions
   /** Switch of middleware works for egg.js, Default: false */
   enable: boolean
   /**
@@ -49,7 +49,7 @@ export interface JwtEggConfig {
   ignore?: MiddlewarePathPattern
 }
 
-export interface JwtOptions {
+export interface ClientOptions {
   /** Authentication options for middleware */
   authOpts?: AuthenticateOpts
   /** Ignored if authOpts.passthrought true */

@@ -1,6 +1,6 @@
 import { basename } from '@waiting/shared-core'
 
-import { Jwt, initialJwtOptions, JwtOptions } from '../src/index'
+import { Jwt, initialClientOptions, ClientOptions } from '../src/index'
 
 import {
   secret,
@@ -18,8 +18,8 @@ describe(filename, () => {
 
   describe('Should Jwt:verify() works', () => {
     it('initializ secret', () => {
-      const opts: JwtOptions = {
-        ...initialJwtOptions,
+      const opts: ClientOptions = {
+        ...initialClientOptions,
         secret,
       }
       const jwt = new Jwt(opts)
@@ -30,8 +30,8 @@ describe(filename, () => {
     })
 
     it('without secret', () => {
-      const opts: JwtOptions = {
-        ...initialJwtOptions,
+      const opts: ClientOptions = {
+        ...initialClientOptions,
       }
       const jwt = new Jwt(opts)
       const token = jwt.sign(payload1, secret)
@@ -46,8 +46,8 @@ describe(filename, () => {
     })
 
     it('pass secret', () => {
-      const opts: JwtOptions = {
-        ...initialJwtOptions,
+      const opts: ClientOptions = {
+        ...initialClientOptions,
       }
       const jwt = new Jwt(opts)
       const token = jwt.sign(payload1, secret)
@@ -57,8 +57,8 @@ describe(filename, () => {
     })
 
     it('only initializing secret', () => {
-      const opts: JwtOptions = {
-        ...initialJwtOptions,
+      const opts: ClientOptions = {
+        ...initialClientOptions,
         secret: 'notused',
       }
       const jwt = new Jwt(opts)
@@ -73,8 +73,8 @@ describe(filename, () => {
     })
 
     it('both initializing and passing secret', () => {
-      const opts: JwtOptions = {
-        ...initialJwtOptions,
+      const opts: ClientOptions = {
+        ...initialClientOptions,
         secret: 'notused',
       }
       const jwt = new Jwt(opts)
@@ -85,8 +85,8 @@ describe(filename, () => {
     })
 
     it('with invalid scope', () => {
-      const opts: JwtOptions = {
-        ...initialJwtOptions,
+      const opts: ClientOptions = {
+        ...initialClientOptions,
         secret,
       }
       const jwt = new Jwt(opts)

@@ -1,7 +1,7 @@
 import { Context } from 'egg'
 
 import { Jwt } from '../src'
-import { initialJwtOptions } from '../src/lib/config'
+import { initialClientOptions } from '../src/lib/config'
 
 import { payload1, testRedirectURL } from './test.config'
 
@@ -17,7 +17,7 @@ export function createContext(props?: object): Context {
     },
     jwtState: {},
     app: {
-      jwt: new Jwt(initialJwtOptions),
+      jwt: new Jwt(initialClientOptions),
     },
     ...props,
   } as unknown as Context

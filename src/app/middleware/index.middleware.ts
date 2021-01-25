@@ -10,7 +10,7 @@ import {
   JwtEggConfig,
   JwtToken,
   JwtDecodedPayload,
-  JwtOptions,
+  ClientOptions,
   SignSecret,
   VerifySecret,
   RedirectURL,
@@ -24,18 +24,18 @@ export default middlewareFactory
 
 function middlewareFactory(config: JwtEggConfig): EggMiddleware {
   const opts = parseOptions(config.client) // defined out of mw()!
-  const jwtmw = (
+  const mw = (
     ctx: Context,
     next: () => Promise<void>,
   ) => authenticate(ctx, next, opts)
 
-  return jwtmw
+  return mw
 }
 
 async function authenticate(
   ctx: Context,
   next: () => Promise<void>,
-  options: JwtOptions,
+  options: ClientOptions,
 ): Promise<void> {
 
   const { debug } = options
@@ -98,7 +98,7 @@ async function authenticate(
  */
 function genVerifySecretSet(
   signSecret: SignSecret,
-  verifySecret?: JwtOptions['verifySecret'],
+  verifySecret?: ClientOptions['verifySecret'],
   ctxSecret?: unknown,
 ): Set<VerifySecret> {
 
@@ -114,7 +114,7 @@ function genVerifySecretSet(
   return ret
 }
 
-function parseSecret(input?: JwtOptions['secret'] | JwtOptions['verifySecret']): Set<VerifySecret> {
+function parseSecret(input?: ClientOptions['secret'] | ClientOptions['verifySecret']): Set<VerifySecret> {
   const ret: Set<VerifySecret> = new Set()
 
   /* istanbul ignore else */
@@ -138,7 +138,7 @@ function validateToken(
   jwtImpl: Jwt,
   token: JwtToken,
   secretSet: Set<VerifySecret>,
-  config: JwtOptions,
+  config: ClientOptions,
 ): JwtDecodedPayload {
 
   /* istanbul ignore next */

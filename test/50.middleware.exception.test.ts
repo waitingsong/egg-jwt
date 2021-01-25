@@ -3,7 +3,7 @@
 import { basename } from '@waiting/shared-core'
 
 import { JwtEggConfig, jwtMiddlewareFactorey } from '../src'
-import { initialEggConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'
+import { initialEggConfig, JwtMsg, schemePrefix } from '../src/lib/config'
 import { parseConfig } from '../src/lib/util'
 
 import { token1 } from './test.config'

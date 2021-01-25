@@ -3,12 +3,12 @@ import assert from 'assert'
 import {
   initialAuthOpts,
   initialEggConfig,
-  initialJwtOptions,
+  initialClientOptions,
   JwtMsg,
 } from './config'
 import {
   JwtEggConfig,
-  JwtOptions,
+  ClientOptions,
   JwtPayload,
   JwtToken,
 } from './types'
@@ -54,8 +54,8 @@ export function parseConfig(input: JwtEggConfig): JwtEggConfig {
 }
 
 /** Generate jwtOptions with input and default value */
-export function parseOptions(client?: JwtOptions): JwtOptions {
-  const opts = {} as JwtOptions
+export function parseOptions(client?: ClientOptions): ClientOptions {
+  const opts = {} as ClientOptions
 
   if (client) {
     const {
@@ -79,8 +79,8 @@ export function parseOptions(client?: JwtOptions): JwtOptions {
     opts.verifySecret = typeof verifySecret === 'undefined' ? void 0 : verifySecret
   }
   else {
-    opts.debug = initialJwtOptions.debug
-    opts.secret = initialJwtOptions.secret
+    opts.debug = initialClientOptions.debug
+    opts.secret = initialClientOptions.secret
     opts.authOpts = { ...initialAuthOpts }
   }
 
@@ -116,7 +116,7 @@ export function validatePayload(input: JwtPayload): void {
 }
 
 
-export function validateSignSecret(input: JwtOptions['secret']): void {
+export function validateSignSecret(input: ClientOptions['secret']): void {
   if (typeof input === 'string') {
     assert(input.length > 0, JwtMsg.InvalidInputString)
     return
@@ -135,7 +135,7 @@ export function validateSignSecret(input: JwtOptions['secret']): void {
 }
 
 
-export function validateVerifySecret(input: JwtOptions['verifySecret']): void {
+export function validateVerifySecret(input: ClientOptions['verifySecret']): void {
   if (input === false) {
     return
   }

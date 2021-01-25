@@ -4,7 +4,7 @@ import { basename } from '@waiting/shared-core'
 import { Context } from 'egg'
 
 import { JwtEggConfig, jwtMiddlewareFactorey, RedirectURL } from '../src'
-import { initialEggConfig, JwtMsg, schemePrefix, initialJwtOptions } from '../src/lib/config'
+import { initialEggConfig, JwtMsg, schemePrefix } from '../src/lib/config'
 import { parseConfig } from '../src/lib/util'
 
 import { token1, testRedirectURL } from './test.config'

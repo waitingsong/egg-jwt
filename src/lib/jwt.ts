@@ -3,7 +3,7 @@ import { JsonType } from '@waiting/shared-types'
 import * as jwt from 'jsonwebtoken'
 
 import {
-  JwtOptions,
+  ClientOptions,
   DecodeOpts,
   JwtPayload,
   JwtToken,
@@ -25,9 +25,9 @@ import {
 
 export class Jwt {
 
-  private readonly config: JwtOptions
+  private readonly config: ClientOptions
 
-  constructor(config: JwtOptions) {
+  constructor(config: ClientOptions) {
     this.config = parseOptions(config)
   }
 
