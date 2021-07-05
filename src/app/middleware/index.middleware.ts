@@ -163,7 +163,10 @@ function validateToken(
     catch (ex) {
       const ss = typeof secret === 'string' ? secret : secret.toString()
       const start = ss.slice(0, 2)
-      const end = ss.length > 5 ? ss.slice(-2) : '**'
+      let end = ss
+      if (! process.env.CI) {
+        end = ss.length > 5 ? ss.slice(-2) : '**'
+      }
       msgs.push(`Error during verify: with secret "${start}****${end}"`)
     }
   })
