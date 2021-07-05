@@ -1,7 +1,7 @@
 {
   "name": "@waiting/egg-jwt",
   "author": "waiting",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "jwt plugin of egg for signing, verifying as plugin and authentication as middleware",
   "eggPlugin": {
     "name": "jwt"

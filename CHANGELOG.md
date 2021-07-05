@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 6.2.0 (2021-07-05)
+
+
+### Features
+
+* log full token string when process.env.CI ([b1d3373](https://github.com/waitingsong/egg-jwt/commit/b1d3373f7e46325be448cb90025ab42abe2d4262))
+
 ## 6.1.0 (2021-06-18)
 
 ## [6.0.0](https://github.com/waitingsong/egg-jwt/compare/v5.0.0...v6.0.0) (2021-01-24)
